@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>ingoodtw</application>
+    <version>igs001</version>
+    <runtime>java8</runtime>
+    <threadsafe>true</threadsafe>
+    <use-google-connector-j>true</use-google-connector-j>
+
+    <system-properties>
+        <property name="aqlLocalDBFolder" value="D://mysql-5.7.22/bin/"/>
+
+        <property name="sqlInsConnName" value="ingoodtw:asia-east1:ingoodtw-db-instance"/>
+        <property name="sqlLocal" value="jdbc:mysql://localhost:3306/"/>
+        <property name="sqlCloud" value="jdbc:google:mysql://"/>
+        <property name="sqlDBName" value="igsdb"/>
+        <property name="sqlUserName" value="root"/>
+        <property name="sqlUserPassword" value="22032201g"/>
+
+        <property name="cs_person_icons" value="persons_icons"/>
+        <property name="cs_activity_images" value="activities_images"/>
+
+        <property name="email_sender_address" value="elminsterii2@gmail.com"/>
+        <property name="email_sender_title" value="545-noreply"/>
+        <property name="email_verify_title" value="Ingood verification"/>
+        <property name="email_verify_title_image_path" value="Ingood verification"/>
+        <property name="email_verify_content_html" value="Hi, Welcome to Ingood world, Your verify code is "/>
+
+        <property name="cs_system_resource" value="system_resource"/>
+        <property name="cs_system_resource_email" value="email"/>
+        <property name="cs_system_resource_email_title_image_name" value="email_title_image.png"/>
+
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    </system-properties>
+</appengine-web-app>
