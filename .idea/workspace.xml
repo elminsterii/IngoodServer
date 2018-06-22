@@ -7,78 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca7c09c5-47d3-44c7-9dfd-159e6688cff1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nbactions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/Activity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/deserializer/ActivityDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/deserializer/CommentDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/data/deserializer/PersonDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlVerifyEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/gcs/CSActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/gcs/CSPerson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/gcs/CSSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/gcs/GcsServiceNullException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/gcs/StorageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceAccessActivityImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceAttendActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceCreateActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceDeemActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceDeleteActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceDeleteActivityImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceQueryActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceQueryActivityIdBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceUpdateActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/comment/HttpServiceCreateComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/comment/HttpServiceDeleteComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/comment/HttpServiceQueryComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/comment/HttpServiceQueryCommentIdBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/comment/HttpServiceUpdateComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/maintenance/HttpServiceClearVerifyEmails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/maintenance/HttpServiceMaintainActivities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceAccessPersonIcon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceCheckPersonExist.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceDeletePersonIcon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceLogout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceQueryPerson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceRegister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUnregister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUpdatePerson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceVerifyEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/json/HttpJsonToActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/json/HttpJsonToComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/json/HttpJsonToJsonObj.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/json/HttpJsonToPerson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/maintainer/ActivityMaintainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ErrorHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/startup/StartStopListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/tools/GcsTool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/tools/HttpTool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/tools/StringTool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/tools/SysRunTool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/cron.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/logging.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/fff/hos/HttpServiceRegisterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,8 +25,26 @@
       <file leaf-file-name="ServerManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+            <state relative-caret-position="136">
+              <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appengine-web.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="21" column="80" lean-forward="true" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VerifyEmailSender.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="61" column="80" selection-start-line="61" selection-start-column="80" selection-end-line="61" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -126,11 +76,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Person.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/data/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+            <state relative-caret-position="340">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpServiceAccessActivityImage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceAccessActivityImage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -141,10 +100,27 @@
     <findStrings>
       <find>hangout</find>
       <find>hos</find>
+      <find>system_resource</find>
+      <find>email_verify_title_image_path</find>
+      <find>email_verify_title</find>
+      <find>545</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="elminsterii2@gmail.com" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -168,7 +144,9 @@
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -185,11 +163,6 @@
             <path>
               <item name="IngoodServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="IngoodServer" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IngoodServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IngoodServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -220,7 +193,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="igs" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="httpservice" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IngoodServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IngoodServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="igs" type="462c0819:PsiDirectoryNode" />
+              <item name="httpservice" type="462c0819:PsiDirectoryNode" />
+              <item name="activity" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -230,6 +213,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="elminsterii2@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="ingoodtw" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="ingoodtw" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="961184250189" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -249,7 +236,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Google App Engine Standard Local Server.Google App Engine Standard Local Server">
+  <component name="RunManager" selected="Google App Engine Deployment.Google App Engine Deployment">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -274,7 +261,16 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     </configuration>
-    <configuration name="Google App Engine Deployment" type="gcp-app-engine-deploy" factoryName="Google App Engine Deployment" server-name="Google App Engine" />
+    <configuration name="Google App Engine Deployment" type="gcp-app-engine-deploy" factoryName="Google App Engine Deployment" server-name="Google App Engine">
+      <deployment type="appengine-artifact-source" name="IngoodServer:war exploded" project="ingoodtw" version="auto">
+        <settings cloudProjectName="ingoodtw" deployAllConfigs="true" environment="APP_ENGINE_STANDARD" googleUsername="elminsterii2@gmail.com" version="" />
+      </deployment>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="IngoodServer:war exploded" />
+        </option>
+      </method>
+    </configuration>
     <configuration name="Google App Engine Standard Local Server" type="gcp-app-engine-local-run" factoryName="Local" APPLICATION_SERVER_NAME="Google App Engine Standard Local Server" ALTERNATIVE_JRE_ENABLED="false">
       <server-settings>
         <artifact>IngoodServer:war exploded</artifact>
@@ -319,9 +315,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Google Stackdriver Debug.Google Stackdriver Debug" />
       <item itemvalue="Google App Engine Deployment.Google App Engine Deployment" />
       <item itemvalue="Google App Engine Standard Local Server.Google App Engine Standard Local Server" />
+      <item itemvalue="Google Stackdriver Debug.Google Stackdriver Debug" />
     </list>
   </component>
   <component name="TaskManager">
@@ -331,12 +327,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529636187087</updated>
-      <workItem from="1529636189437" duration="1665000" />
+      <workItem from="1529636189437" duration="3972000" />
     </task>
+    <task id="LOCAL-00001" summary="[igs] migrate to new repository.">
+      <created>1529638089916</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1529638089916</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1665000" />
+    <option name="totallyTimeSpent" value="3972000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -347,14 +351,14 @@
       <window_info anchor="right" id="Palette&#9;" />
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" weight="0.32972974" />
-      <window_info anchor="bottom" id="Application Servers" />
+      <window_info active="true" anchor="bottom" id="Application Servers" visible="true" weight="0.18594594" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2064865" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15677084" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15677084" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -362,7 +366,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.27135134" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.27135134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -375,6 +379,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="[igs] migrate to new repository." />
+    <option name="LAST_COMMIT_MESSAGE" value="[igs] migrate to new repository." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -397,22 +407,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceAccessActivityImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IngoodServer.iml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -448,10 +444,45 @@
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/fff/igs/HttpServiceRegisterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/data/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+        <state relative-caret-position="340">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/activity/HttpServiceAccessActivityImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="21" column="80" lean-forward="true" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="61" column="80" selection-start-line="61" selection-start-column="80" selection-end-line="61" selection-end-column="80" />
         </state>
       </provider>
     </entry>

@@ -59,7 +59,7 @@ public class VerifyEmailSender {
                     "<p>&nbsp;</p>\n" +
                     "<p>&nbsp;</p>\n" +
                     "<p>&nbsp;</p>\n" +
-                    "<h5 style=\"text-align: center;\">Copyright &copy; 545 inc.</h5>\n" +
+                    "<h5 style=\"text-align: center;\">Copyright &copy; 545 Corp.</h5>\n" +
                     "<h5 style=\"text-align: center;\">版權所有&copy;&nbsp;五四五資訊股份有限公司</h5>\n" +
                     "<h5 style=\"text-align: center;\">台北市大安區忠孝東路四段166號10樓</h5>");
 
