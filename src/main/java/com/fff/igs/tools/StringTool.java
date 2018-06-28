@@ -14,10 +14,17 @@ public class StringTool {
         if(arrString.length <= 0)
             return "";
 
+        //contain compare
         for(String str : arrString) {
-            strBuilder.append("[[:<:]]").append(str).append("[[:>:]]");
+            strBuilder.append(str);
             strBuilder.append("|");
         }
+
+        //precise compare
+//        for(String str : arrString) {
+//            strBuilder.append("[[:<:]]").append(str).append("[[:>:]]");
+//            strBuilder.append("|");
+//        }
 
         if(strBuilder.length() > 0)
             strBuilder.deleteCharAt(strBuilder.length()-1);
