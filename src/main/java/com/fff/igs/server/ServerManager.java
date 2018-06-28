@@ -4,6 +4,7 @@ import com.fff.igs.data.Activity;
 import com.fff.igs.data.Comment;
 import com.fff.igs.data.Person;
 import com.fff.igs.database.DatabaseManager;
+import com.fff.igs.email.ResetPasswordEmailSender;
 import com.fff.igs.email.VerifyEmailSender;
 import com.fff.igs.gcs.StorageManager;
 import com.fff.igs.maintainer.ActivityMaintainer;
@@ -269,7 +270,17 @@ public class ServerManager {
                 serverResp.setContent(personLogin);
                 resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
             } else {
-                resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_INVALID;
+                if(dbMgr.isTempPasswordExist(person.getEmail())) {
+                    if (dbMgr.loginTempPassword(person.getEmail(), person.getUserPassword())) {
+                        Person personLoginWithTempPassword = dbMgr.queryPerson(null, person.getEmail());
+                        serverResp.setContent(personLoginWithTempPassword);
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                    } else {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_INVALID;
+                    }
+                } else {
+                    resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_INVALID;
+                }
             }
         } else {
             resCode = ServerResponse.STATUS_CODE.ST_CODE_JSON_FORMAT_WRONG;
@@ -1045,7 +1056,7 @@ public class ServerManager {
     }
 
 
-    // ------------------------------- Verify email control functions -------------------------------
+    // ------------------------------- VerifyEmail control functions -------------------------------
     public ServerResponse verifyEmail(JsonObject jsonSource) {
         ServerResponse serverResp = new ServerResponse();
         ServerResponse.STATUS_CODE resCode;
@@ -1102,6 +1113,68 @@ public class ServerManager {
         return serverResp;
     }
 
+    // ------------------------------- TempPassword control functions -------------------------------
+    public ServerResponse genTempPassword(JsonObject jsonSource) {
+        ServerResponse serverResp = new ServerResponse();
+        ServerResponse.STATUS_CODE resCode;
+
+        if (jsonSource != null) {
+            final String TAG_EMAIL = "email";
+            JsonElement jsEmail = jsonSource.get(TAG_EMAIL);
+
+            if (jsEmail != null && !jsEmail.getAsString().isEmpty()) {
+                String strEmail = jsEmail.getAsString();
+
+                DatabaseManager dbMgr = getDatabaseManager();
+
+                if(dbMgr.checkPersonExist(strEmail)) {
+                    ResetPasswordEmailSender sender = new ResetPasswordEmailSender();
+                    String strTempPassword = sender.sendTempPasswordMail(strEmail);
+
+                    boolean bRes;
+                    if(dbMgr.isTempPasswordExist(strEmail))
+                        bRes = dbMgr.updateTempPassword(strEmail, strTempPassword);
+                    else
+                        bRes = dbMgr.createTempPassword(strEmail, strTempPassword);
+
+                    if(bRes) {
+                        serverResp.setContent(strTempPassword);
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                    } else {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_INVALID_DATA;
+                    }
+                } else {
+                    resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_NOT_FOUND;
+                }
+
+            } else {
+                resCode = ServerResponse.STATUS_CODE.ST_CODE_MISSING_NECESSARY;
+            }
+        } else {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_JSON_FORMAT_WRONG;
+        }
+
+        serverResp.setStatus(resCode);
+        return serverResp;
+    }
+
+    public ServerResponse clearTempPasswords() {
+        ServerResponse serverResp = new ServerResponse();
+        ServerResponse.STATUS_CODE resCode;
+
+        boolean bRes;
+        DatabaseManager dbMgr = getDatabaseManager();
+        bRes = dbMgr.clearTempPasswords();
+
+        if(bRes) {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+        } else {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_INVALID_DATA;
+        }
+
+        serverResp.setStatus(resCode);
+        return serverResp;
+    }
 
     // --------------------------------- Manager getter functions ---------------------------------
     private DatabaseManager getDatabaseManager() {

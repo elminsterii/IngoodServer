@@ -12,6 +12,7 @@ public class DatabaseManager {
     private DBCtrlActivity m_dbCtrlActivity = null;
     private DBCtrlComment m_dbCtrlComment = null;
     private DBCtrlVerifyEmail m_dbCtrlVerifyEmail = null;
+    private DBCtrlTempPassword m_dbCtrlTempPassword = null;
 
     public DatabaseManager() { }
 
@@ -145,7 +146,7 @@ public class DatabaseManager {
     }
 
 
-    // --------------------------------- Comment control functions ---------------------------------
+    // --------------------------------- VerifyEmail control functions ---------------------------------
     public boolean createVerifyEmail(String strEmail, String strCode) {
         return getDBCtrlVerifyEmail().insert(strEmail, strCode);
     }
@@ -171,6 +172,31 @@ public class DatabaseManager {
     }
 
 
+    // --------------------------------- TempPassword control functions ---------------------------------
+    public boolean createTempPassword(String strEmail, String strTempPassword) {
+        return getDBCtrlTempPassword().insert(strEmail, strTempPassword);
+    }
+
+    public boolean deleteTempPassword(String strEmail) {
+        return getDBCtrlTempPassword().delete(strEmail);
+    }
+
+    public boolean clearTempPasswords() {
+        return getDBCtrlTempPassword().deleteAll();
+    }
+
+    public boolean isTempPasswordExist(String strEmail) {
+        return getDBCtrlTempPassword().isTempPasswordExist(strEmail);
+    }
+
+    public boolean updateTempPassword(String strEmail, String strTempPassword) {
+        return getDBCtrlTempPassword().update(strEmail, strTempPassword);
+    }
+
+    public boolean loginTempPassword(String strEmail, String strTempPassword) {
+        return getDBCtrlTempPassword().login(strEmail, strTempPassword);
+    }
+
     // ---------------------------- Database Controller getter functions ----------------------------
     private DBCtrlPerson getDBCtrlPerson() {
         if(m_dbCtrlPerson == null)
@@ -194,5 +220,11 @@ public class DatabaseManager {
         if(m_dbCtrlVerifyEmail == null)
             m_dbCtrlVerifyEmail = new DBCtrlVerifyEmail();
         return m_dbCtrlVerifyEmail;
+    }
+
+    private DBCtrlTempPassword getDBCtrlTempPassword() {
+        if(m_dbCtrlTempPassword == null)
+            m_dbCtrlTempPassword = new DBCtrlTempPassword();
+        return m_dbCtrlTempPassword;
     }
 }

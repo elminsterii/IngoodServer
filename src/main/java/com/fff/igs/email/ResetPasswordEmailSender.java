@@ -16,12 +16,12 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Logger;
 
-public class VerifyEmailSender {
+public class ResetPasswordEmailSender {
 
-    private static final Logger LOGGER = Logger.getLogger(VerifyEmailSender.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ResetPasswordEmailSender.class.getName());
 
-    public String sendVerifyMail(String strTargetEmail) {
-        String strVerifyCode = genVerifyCode();
+    public String sendTempPasswordMail(String strTargetEmail) {
+        String strNewPassword = genNewPassword();
 
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
@@ -31,7 +31,7 @@ public class VerifyEmailSender {
             msg.setFrom(new InternetAddress(System.getProperty("email_sender_address"), System.getProperty("email_sender_title")));
             msg.addRecipient(Message.RecipientType.TO,
                     new InternetAddress(strTargetEmail, ""));
-            msg.setSubject(System.getProperty("email_verify_title"));
+            msg.setSubject(System.getProperty("email_reset_password_title"));
 
             String headerImageCid = System.getProperty("cs_system_resource_email_title_image_name");
             InputStream pngInputStream = getTitleImageFromCS();
@@ -47,13 +47,14 @@ public class VerifyEmailSender {
             strHtmlBody.append(System.getProperty("cs_system_resource_email_title_image_name"))
                     .append("\"/></p>").append("<h2 id=\"mcetoc_1cg8g9v7n5\" style=\"text-align: center;\"></h2>\n")
                     .append("<h1 id=\"mcetoc_1cg8g9rit3\" style=\"text-align: center;\"><span style=\"color: #ffcc00;\">" +
-                            "<em><strong>你，讓世界更美好</strong></em></span></h1>\n")
-                    .append("<p>&nbsp;</p>\n").append("<p>Hi 親愛的朋友，歡迎來到Ingood。</p>");
+                            "<em><strong>你  讓世界更美好</strong></em></span></h1>\n")
+                    .append("<p>&nbsp;</p>\n").append("<p>Hi 親愛的朋友，系統已為您產生一組臨時密碼。</p>");
 
-            strHtmlBody.append("<p>您的驗證碼為 : <strong>");
-            strHtmlBody.append(strVerifyCode);
+            strHtmlBody.append("<p>您的臨時密碼為 : <strong>");
+            strHtmlBody.append(strNewPassword);
             strHtmlBody.append("<strong>&nbsp;&nbsp;<br /><br /></p>");
-            strHtmlBody.append("<p>驗證碼為四位數字，驗證碼當天有效，如果有重覆發送，請以最後收到的驗證碼為主。</p>\n" +
+            strHtmlBody.append("<p>臨時密碼為數字0到9 以及 大寫字母組成，請以此組密碼登入，並完成密碼修改。</p>\n" +
+                    "<p>臨時密碼為四位數字，臨時密碼當天有效，如果有重覆產生，請以最後收到的臨時密碼為主。</p>\n" +
                     "<p>&nbsp;</p>\n" +
                     "<p>&nbsp;</p>\n" +
                     "<p>&nbsp;</p>\n" +
@@ -77,22 +78,23 @@ public class VerifyEmailSender {
         } catch (MessagingException | IOException e) {
             LOGGER.warning(e.getMessage());
         }
-        return strVerifyCode;
+        return strNewPassword;
     }
 
-    private String genVerifyCode() {
-        StringBuilder strVerifyCode = new StringBuilder();
+    private String genNewPassword() {
+        StringBuilder strNewPassword = new StringBuilder();
 
-        final int CODE_SIZE = 4;
-        final int MAX_NUMBER = 9;
-        final int MIN_NUMBER = 0;
+        final int CODE_SIZE = 8;
 
-        Random rand = new Random();
+        String SALT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-        for(int i=0; i<CODE_SIZE; i++)
-            strVerifyCode.append(rand.nextInt(MAX_NUMBER - MIN_NUMBER + 1));
+        Random rnd = new Random();
+        while (strNewPassword.length() < CODE_SIZE) {
+            int index = (int) (rnd.nextFloat() * SALT_CHARS.length());
+            strNewPassword.append(SALT_CHARS.charAt(index));
+        }
 
-        return strVerifyCode.toString();
+        return strNewPassword.toString();
     }
 
     private InputStream getTitleImageFromCS() throws IOException {

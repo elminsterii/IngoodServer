@@ -54,4 +54,9 @@ class DBConstants {
     static final String TABLE_NAME_VERIFYEMAIL = "verifyemails";
     static final String VERIFYEMAIL_COL_EMAIL = "email";
     static final String VERIFYEMAIL_COL_CODE = "code";
+
+    //TempPassword constants
+    static final String TABLE_NAME_TEMPPASSWORD = "temppassword";
+    static final String TEMPPASSWORD_COL_EMAIL = "email";
+    static final String TEMPPASSWORD_COL_TEMPPASSWORD = "temppassword";
 }

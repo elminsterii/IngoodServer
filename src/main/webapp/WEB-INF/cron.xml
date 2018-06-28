@@ -12,4 +12,10 @@
         <schedule>every day 03:10</schedule>
         <timezone>Asia/Taipei</timezone>
     </cron>
+    <cron>
+        <url>/cleartemppasswords</url>
+        <description>daily job for clear verify emails</description>
+        <schedule>every day 03:20</schedule>
+        <timezone>Asia/Taipei</timezone>
+    </cron>
 </cronentries>

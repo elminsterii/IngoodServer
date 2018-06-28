@@ -21,9 +21,8 @@
 
         <property name="email_sender_address" value="fivefourfiveit@gmail.com"/>
         <property name="email_sender_title" value="Ingood"/>
-        <property name="email_verify_title" value="Ingood verification"/>
-        <property name="email_verify_title_image_path" value="Ingood verification"/>
-        <property name="email_verify_content_html" value="Hi, Welcome to Ingood world, Your verify code is "/>
+        <property name="email_verify_title" value="Ingood 帳號驗證"/>
+        <property name="email_reset_password_title" value="Ingood 密碼重置"/>
 
         <property name="cs_system_resource" value="ingood_system_resource"/>
         <property name="cs_system_resource_email" value="email"/>
