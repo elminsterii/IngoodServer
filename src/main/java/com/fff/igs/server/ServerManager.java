@@ -290,6 +290,57 @@ public class ServerManager {
         return serverResp;
     }
 
+    public ServerResponse saveActivity(JsonObject jsonSource) {
+        ServerResponse serverResp = new ServerResponse();
+        ServerResponse.STATUS_CODE resCode;
+
+        if(jsonSource != null) {
+            final String TAG_EMAIL = "email";
+            final String TAG_ACTIVITYID = "activityid";
+            final String TAG_IS_SAVE = "issave";
+
+            JsonElement jsonEmail = jsonSource.get(TAG_EMAIL);
+            JsonElement jsonActivityId = jsonSource.get(TAG_ACTIVITYID);
+            JsonElement jsonIsSave = jsonSource.get(TAG_IS_SAVE);
+
+            StringTool stringTool = new StringTool();
+
+            if (jsonEmail != null
+                    && jsonActivityId != null
+                    && jsonIsSave != null
+                    && stringTool.checkStringNotNull(jsonEmail.getAsString())
+                    && stringTool.checkStringNotNull(jsonActivityId.getAsString())) {
+
+                String strEmail = jsonEmail.getAsString();
+                String strActivityId = jsonActivityId.getAsString();
+                Integer iIsSave = jsonIsSave.getAsInt();
+
+                DatabaseManager dbMgr = getDatabaseManager();
+
+                if(dbMgr.checkPersonExist(strEmail)) {
+                    if (dbMgr.checkActivityExist(strActivityId)) {
+                        if (dbMgr.saveActivity(strEmail, strActivityId, iIsSave)) {
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                        } else {
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_FAIL_SAVE_OR_FAIL_CANCEL;
+                        }
+                    } else {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
+                    }
+                } else {
+                    resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_NOT_FOUND;
+                }
+            } else {
+                resCode = ServerResponse.STATUS_CODE.ST_CODE_MISSING_NECESSARY;
+            }
+        } else {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_JSON_FORMAT_WRONG;
+        }
+
+        serverResp.setStatus(resCode);
+        return serverResp;
+    }
+
     public ServerResponse deletePersonIcon(JsonObject jsonSource) throws IOException {
         ServerResponse serverResp = new ServerResponse();
         ServerResponse.STATUS_CODE resCode;
@@ -428,7 +479,6 @@ public class ServerManager {
         serverResp.setStatus(resCode);
         return serverResp;
     }
-
 
     // --------------------------------- Activity control functions ---------------------------------
     public ServerResponse createActivity(Activity activity) throws IOException {

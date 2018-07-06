@@ -20,6 +20,7 @@ public class ServerResponse {
         , ST_CODE_FAIL_ATTEND_OR_FAIL_CANCEL
         , ST_CODE_FAIL_VERIFY_CODE_WRONG
         , ST_CODE_TIME_FORMAT_WRONG
+        , ST_CODE_FAIL_SAVE_OR_FAIL_CANCEL
     }
 
     public ServerResponse() {

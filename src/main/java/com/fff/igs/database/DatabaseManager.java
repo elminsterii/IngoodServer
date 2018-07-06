@@ -81,6 +81,9 @@ public class DatabaseManager {
         return getDBCtrlPerson().checkPersonExist(strEmail);
     }
 
+    public boolean saveActivity(String strEmail, String strActivityId, Integer iIsSave) {
+        return getDBCtrlPerson().saveActivity(strEmail, strActivityId, iIsSave);
+    }
 
     // --------------------------------- Activity control functions ---------------------------------
     public String createActivity(Activity activity) {

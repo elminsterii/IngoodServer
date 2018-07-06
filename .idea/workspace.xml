@@ -6,18 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca7c09c5-47d3-44c7-9dfd-159e6688cff1" name="Default" comment="[igs] contain compare for take activity by tags.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlTempPassword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/ResetPasswordEmailSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/maintenance/HttpServiceClearTempPasswords.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceTempPassword.java" afterDir="false" />
+    <list default="true" id="ca7c09c5-47d3-44c7-9dfd-159e6688cff1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceSaveActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ErrorHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/cron.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/cron.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerResponse.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,17 +25,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ServerManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="1177" lean-forward="true" selection-start-line="1177" selection-end-line="1177" />
+            <state relative-caret-position="89">
+              <caret line="318" lean-forward="true" selection-start-line="318" selection-end-line="318" />
               <folding>
+                <element signature="method#checkPersonExist#0;class#ServerManager#0" />
+                <element signature="method#register#0;class#ServerManager#0" />
+                <element signature="method#unregister#0;class#ServerManager#0" />
+                <element signature="method#updatePerson#0;class#ServerManager#0" />
+                <element signature="method#queryPerson#0;class#ServerManager#0" />
+                <element signature="method#logout#0;class#ServerManager#0" />
+                <element signature="method#login#0;class#ServerManager#0" />
+                <element signature="method#deletePersonIcon#0;class#ServerManager#0" />
+                <element signature="method#uploadPersonIcon#0;class#ServerManager#0" />
+                <element signature="method#downloadPersonIcon#0;class#ServerManager#0" />
+                <element signature="method#listPersonIcons#0;class#ServerManager#0" />
+                <element signature="method#createActivity#0;class#ServerManager#0" />
+                <element signature="method#deleteActivity#0;class#ServerManager#0" />
+                <element signature="method#queryActivity#0;class#ServerManager#0" />
+                <element signature="method#queryAll#0;class#ServerManager#0" />
+                <element signature="method#queryActivityIdBy#0;class#ServerManager#0" />
+                <element signature="method#updateActivity#0;class#ServerManager#0" />
+                <element signature="method#deleteActivityImage#0;class#ServerManager#0" />
+                <element signature="method#uploadActivityImage#0;class#ServerManager#0" />
+                <element signature="method#downloadActivityImage#0;class#ServerManager#0" />
+                <element signature="method#listActivityImage#0;class#ServerManager#0" />
+                <element signature="method#attendActivity#0;class#ServerManager#0" />
                 <element signature="method#deemActivity#0;class#ServerManager#0" />
                 <element signature="method#createComment#0;class#ServerManager#0" />
                 <element signature="method#deleteComment#0;class#ServerManager#0" />
                 <element signature="method#queryComment#0;class#ServerManager#0" />
                 <element signature="method#queryCommentIdBy#0;class#ServerManager#0" />
+                <element signature="method#updateComment#0;class#ServerManager#0" />
                 <element signature="method#verifyEmail#0;class#ServerManager#0" />
                 <element signature="method#clearVerifyEmails#0;class#ServerManager#0" />
                 <element signature="method#genTempPassword#0;class#ServerManager#0" />
@@ -51,72 +70,36 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="HttpServiceSaveActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceSaveActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="14" column="68" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="174" column="53" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="53" />
+            <state relative-caret-position="354">
+              <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
               <folding>
-                <element signature="e#2618#2619#0" expanded="true" />
-                <element signature="e#2685#2686#0" expanded="true" />
-                <element signature="e#4751#4994#0" />
-                <element signature="e#5344#5482#0" />
-                <element signature="e#5488#5620#0" />
+                <element signature="e#1132#1279#0" />
+                <element signature="e#1285#1691#0" />
+                <element signature="e#1697#2113#0" />
+                <element signature="e#2119#2277#0" />
+                <element signature="e#2283#2433#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpServiceTempPassword.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceTempPassword.java">
+      <file leaf-file-name="DBCtrlPerson.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="18" column="58" lean-forward="true" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VerifyEmailSender.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResetPasswordEmailSender.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/ResetPasswordEmailSender.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HttpServiceUnregister.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUnregister.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="34" selection-start-line="34" selection-end-line="37" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBConstants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="60" column="53" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBCtrlTempPassword.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlTempPassword.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="2">
+              <caret line="446" column="32" selection-start-line="446" selection-start-column="32" selection-end-line="446" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -124,8 +107,8 @@
       <file leaf-file-name="appengine-web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="24" column="73" lean-forward="true" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+            <state relative-caret-position="816">
+              <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -133,8 +116,8 @@
       <file leaf-file-name="StringTool.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/tools/StringTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="544">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -163,6 +146,12 @@
       <find>cro</find>
       <find>m_dbMgr</find>
       <find>user_not</find>
+      <find>update</find>
+      <find>attend</find>
+      <find>act</find>
+      <find>ACTivity</find>
+      <find>final int INT</find>
+      <find>ST_CODE_TIME_FORMAT_WRONG</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,6 +178,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/email/ResetPasswordEmailSender.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceSaveActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ErrorHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java" />
       </list>
     </option>
@@ -224,7 +217,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -319,6 +311,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -335,8 +328,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.fff.igs.httpservice.maintenance" />
       <recent name="com.fff.igs.httpservice.person" />
+      <recent name="com.fff.igs.httpservice.maintenance" />
       <recent name="com.fff.igs.database" />
       <recent name="com.fff.igs.email" />
     </key>
@@ -446,7 +439,8 @@
       <updated>1529636187087</updated>
       <workItem from="1529636189437" duration="4693000" />
       <workItem from="1530181093889" duration="60000" />
-      <workItem from="1530181173905" duration="6853000" />
+      <workItem from="1530181173905" duration="7012000" />
+      <workItem from="1530856698833" duration="3280000" />
     </task>
     <task id="LOCAL-00001" summary="[igs] migrate to new repository.">
       <created>1529638089916</created>
@@ -469,11 +463,18 @@
       <option name="project" value="LOCAL" />
       <updated>1530185370370</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[igs] support new API &quot;Temp password&quot;.">
+      <created>1530189379170</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1530189379170</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11606000" />
+    <option name="totallyTimeSpent" value="15045000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -484,14 +485,14 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32972974" />
-      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.18594594" />
+      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.14162162" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2064865" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13229166" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13177083" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -499,7 +500,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.27027026" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.26918918" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -518,7 +519,8 @@
     <MESSAGE value="[igs] migrate to new repository." />
     <MESSAGE value="[igs] modify email sender." />
     <MESSAGE value="[igs] contain compare for take activity by tags." />
-    <option name="LAST_COMMIT_MESSAGE" value="[igs] contain compare for take activity by tags." />
+    <MESSAGE value="[igs] support new API &quot;Temp password&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="[igs] support new API &quot;Temp password&quot;." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -530,21 +532,120 @@
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java</url>
+          <line>396</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="10" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceTempPassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="16" column="58" lean-forward="true" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1258">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/ResetPasswordEmailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUnregister.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="34" selection-start-line="34" selection-end-line="37" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="60" column="53" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlTempPassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3944">
+          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="24" column="73" lean-forward="true" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/tools/StringTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+          <folding>
+            <element signature="e#1132#1279#0" />
+            <element signature="e#1285#1691#0" />
+            <element signature="e#1697#2113#0" />
+            <element signature="e#2119#2277#0" />
+            <element signature="e#2283#2433#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
           <folding>
+            <element signature="method#checkPersonExist#0;class#ServerManager#0" />
+            <element signature="method#register#0;class#ServerManager#0" />
+            <element signature="method#unregister#0;class#ServerManager#0" />
+            <element signature="method#updatePerson#0;class#ServerManager#0" />
+            <element signature="method#queryPerson#0;class#ServerManager#0" />
+            <element signature="method#logout#0;class#ServerManager#0" />
+            <element signature="method#login#0;class#ServerManager#0" />
+            <element signature="method#deletePersonIcon#0;class#ServerManager#0" />
+            <element signature="method#uploadPersonIcon#0;class#ServerManager#0" />
+            <element signature="method#downloadPersonIcon#0;class#ServerManager#0" />
+            <element signature="method#listPersonIcons#0;class#ServerManager#0" />
+            <element signature="method#createActivity#0;class#ServerManager#0" />
+            <element signature="method#deleteActivity#0;class#ServerManager#0" />
+            <element signature="method#queryActivity#0;class#ServerManager#0" />
+            <element signature="method#queryAll#0;class#ServerManager#0" />
+            <element signature="method#queryActivityIdBy#0;class#ServerManager#0" />
+            <element signature="method#updateActivity#0;class#ServerManager#0" />
+            <element signature="method#deleteActivityImage#0;class#ServerManager#0" />
+            <element signature="method#uploadActivityImage#0;class#ServerManager#0" />
+            <element signature="method#downloadActivityImage#0;class#ServerManager#0" />
+            <element signature="method#listActivityImage#0;class#ServerManager#0" />
+            <element signature="method#attendActivity#0;class#ServerManager#0" />
             <element signature="method#deemActivity#0;class#ServerManager#0" />
             <element signature="method#createComment#0;class#ServerManager#0" />
             <element signature="method#deleteComment#0;class#ServerManager#0" />
             <element signature="method#queryComment#0;class#ServerManager#0" />
             <element signature="method#queryCommentIdBy#0;class#ServerManager#0" />
+            <element signature="method#updateComment#0;class#ServerManager#0" />
             <element signature="method#verifyEmail#0;class#ServerManager#0" />
             <element signature="method#clearVerifyEmails#0;class#ServerManager#0" />
             <element signature="method#genTempPassword#0;class#ServerManager#0" />
@@ -709,24 +810,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="249" column="9" lean-forward="true" selection-start-line="249" selection-start-column="9" selection-end-line="249" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/tools/StringTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        <state relative-caret-position="544">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/appengine-web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="73" lean-forward="true" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+        <state relative-caret-position="816">
+          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
         </state>
       </provider>
     </entry>
@@ -737,16 +831,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="223" column="27" lean-forward="true" selection-start-line="223" selection-start-column="27" selection-end-line="223" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
+        <state relative-caret-position="2040">
           <caret line="60" column="53" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="53" />
         </state>
       </provider>
@@ -755,13 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUnregister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="34" selection-start-line="34" selection-end-line="37" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -781,56 +861,114 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlTempPassword.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="3944">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/VerifyEmailSender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="1258">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/email/ResetPasswordEmailSender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="1088">
           <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceTempPassword.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="18" column="58" lean-forward="true" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+        <state relative-caret-position="204">
+          <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceUnregister.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="34" selection-start-line="34" selection-end-line="37" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="471" column="34" lean-forward="true" selection-start-line="471" selection-start-column="34" selection-end-line="471" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="174" column="53" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="53" />
+        <state relative-caret-position="354">
+          <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
           <folding>
-            <element signature="e#2618#2619#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
-            <element signature="e#4751#4994#0" />
-            <element signature="e#5344#5482#0" />
-            <element signature="e#5488#5620#0" />
+            <element signature="e#1132#1279#0" />
+            <element signature="e#1285#1691#0" />
+            <element signature="e#1697#2113#0" />
+            <element signature="e#2119#2277#0" />
+            <element signature="e#2283#2433#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ErrorHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/database/DBCtrlPerson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="446" column="32" selection-start-line="446" selection-start-column="32" selection-end-line="446" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/server/ServerManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="1177" lean-forward="true" selection-start-line="1177" selection-end-line="1177" />
+        <state relative-caret-position="89">
+          <caret line="318" lean-forward="true" selection-start-line="318" selection-end-line="318" />
           <folding>
+            <element signature="method#checkPersonExist#0;class#ServerManager#0" />
+            <element signature="method#register#0;class#ServerManager#0" />
+            <element signature="method#unregister#0;class#ServerManager#0" />
+            <element signature="method#updatePerson#0;class#ServerManager#0" />
+            <element signature="method#queryPerson#0;class#ServerManager#0" />
+            <element signature="method#logout#0;class#ServerManager#0" />
+            <element signature="method#login#0;class#ServerManager#0" />
+            <element signature="method#deletePersonIcon#0;class#ServerManager#0" />
+            <element signature="method#uploadPersonIcon#0;class#ServerManager#0" />
+            <element signature="method#downloadPersonIcon#0;class#ServerManager#0" />
+            <element signature="method#listPersonIcons#0;class#ServerManager#0" />
+            <element signature="method#createActivity#0;class#ServerManager#0" />
+            <element signature="method#deleteActivity#0;class#ServerManager#0" />
+            <element signature="method#queryActivity#0;class#ServerManager#0" />
+            <element signature="method#queryAll#0;class#ServerManager#0" />
+            <element signature="method#queryActivityIdBy#0;class#ServerManager#0" />
+            <element signature="method#updateActivity#0;class#ServerManager#0" />
+            <element signature="method#deleteActivityImage#0;class#ServerManager#0" />
+            <element signature="method#uploadActivityImage#0;class#ServerManager#0" />
+            <element signature="method#downloadActivityImage#0;class#ServerManager#0" />
+            <element signature="method#listActivityImage#0;class#ServerManager#0" />
+            <element signature="method#attendActivity#0;class#ServerManager#0" />
             <element signature="method#deemActivity#0;class#ServerManager#0" />
             <element signature="method#createComment#0;class#ServerManager#0" />
             <element signature="method#deleteComment#0;class#ServerManager#0" />
             <element signature="method#queryComment#0;class#ServerManager#0" />
             <element signature="method#queryCommentIdBy#0;class#ServerManager#0" />
+            <element signature="method#updateComment#0;class#ServerManager#0" />
             <element signature="method#verifyEmail#0;class#ServerManager#0" />
             <element signature="method#clearVerifyEmails#0;class#ServerManager#0" />
             <element signature="method#genTempPassword#0;class#ServerManager#0" />
@@ -838,6 +976,13 @@
             <element signature="method#getDatabaseManager#0;class#ServerManager#0" />
             <element signature="method#getStorageManager#0;class#ServerManager#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fff/igs/httpservice/person/HttpServiceSaveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="68" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="68" />
         </state>
       </provider>
     </entry>

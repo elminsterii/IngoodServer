@@ -109,6 +109,13 @@ public class ErrorHandler {
                 strResponse = jsonObj.toString();
                 break;
 
+            case ST_CODE_FAIL_SAVE_OR_FAIL_CANCEL :
+                jsonObj = new JsonObject();
+                jsonObj.addProperty(FAIL_PROPERTY_TITLE, stCode.ordinal());
+                jsonObj.addProperty(FAIL_PROPERTY_CONTENT, "Fail, cancel save/save activity wrong");
+                strResponse = jsonObj.toString();
+                break;
+
             default:
                 jsonObj = new JsonObject();
                 jsonObj.addProperty(FAIL_PROPERTY_TITLE, stCode.ordinal());
