@@ -47,7 +47,7 @@ public class VerifyEmailSender {
             strHtmlBody.append(System.getProperty("cs_system_resource_email_title_image_name"))
                     .append("\"/></p>").append("<h2 id=\"mcetoc_1cg8g9v7n5\" style=\"text-align: center;\"></h2>\n")
                     .append("<h1 id=\"mcetoc_1cg8g9rit3\" style=\"text-align: center;\"><span style=\"color: #ffcc00;\">" +
-                            "<em><strong>你，讓世界更美好</strong></em></span></h1>\n")
+                            "<em><strong>活動 x 揪團 x 社交</strong></em></span></h1>\n")
                     .append("<p>&nbsp;</p>\n").append("<p>Hi 親愛的朋友，歡迎來到Ingood。</p>");
 
             strHtmlBody.append("<p>您的驗證碼為 : <strong>");
