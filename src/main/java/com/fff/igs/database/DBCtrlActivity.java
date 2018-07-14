@@ -464,6 +464,7 @@ class DBCtrlActivity {
         return bRes;
     }
 
+    @SuppressWarnings("Duplicates")
     boolean attend(String strActivityId, Integer iAttend, String strPersonId) {
         boolean bRes = false;
         StringTool stringTool = new StringTool();
@@ -475,16 +476,25 @@ class DBCtrlActivity {
 
         final int INT_ATTENDED = 1;
 
-        String strNewAttendees = queryAttendees(strActivityId);
+        Activity acticity = queryAttendInfo(strActivityId);
+
+        if(acticity == null)
+            return false;
+
+        String strNewAttendees = acticity.getAttendees();
 
         //handle attendees string.
         if(iAttend == INT_ATTENDED) {
+            if(acticity.getAttention() >= acticity.getMaxAttention())
+                return false;
+
             if(stringTool.checkStringNotNull(strNewAttendees)) {
                 String[] arrAttendees = strNewAttendees.split(",");
                 for (String strAttendee : arrAttendees) {
                     if (strAttendee.equals(strPersonId))
                         return false;
                 }
+
                 strNewAttendees = strNewAttendees + "," + strPersonId;
             }
             else
@@ -563,17 +573,21 @@ class DBCtrlActivity {
         return bRes;
     }
 
-    private String queryAttendees(String strActivityId) {
-        String strAttendees = "";
+    private Activity queryAttendInfo(String strActivityId) {
+        Activity activity = null;
 
         StringTool stringTool = new StringTool();
 
         if (!stringTool.checkStringNotNull(strActivityId))
             return null;
 
+        activity = new Activity();
+
         Connection conn = DBConnection.getConnection();
         StringBuilder strSelectSQL = new StringBuilder("SELECT ");
-        strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append(" FROM ");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append(",");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append(",");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append(" FROM ");
         strSelectSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
         strSelectSQL.append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strActivityId).append("\";");
 
@@ -582,7 +596,9 @@ class DBCtrlActivity {
             stopwatch.stop();
 
             while (rs.next()) {
-                strAttendees = rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES);
+                activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
+                activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
+                activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
             }
         } catch (SQLException e) {
             LOGGER.warning("SQL erro, " + e.getMessage());
@@ -590,7 +606,7 @@ class DBCtrlActivity {
 
         LOGGER.info("query time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
 
-        return strAttendees;
+        return activity;
     }
 
     private void fillUpdateActivityIfNull(Activity oldActivity, Activity newActivity) {

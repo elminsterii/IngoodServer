@@ -91,7 +91,7 @@ public class ErrorHandler {
             case ST_CODE_FAIL_ATTEND_OR_FAIL_CANCEL :
                 jsonObj = new JsonObject();
                 jsonObj.addProperty(FAIL_PROPERTY_TITLE, stCode.ordinal());
-                jsonObj.addProperty(FAIL_PROPERTY_CONTENT, "Fail, already attend or cancel fail?");
+                jsonObj.addProperty(FAIL_PROPERTY_CONTENT, "Fail, Upper limit or already attend or cancel fail?");
                 strResponse = jsonObj.toString();
                 break;
 
