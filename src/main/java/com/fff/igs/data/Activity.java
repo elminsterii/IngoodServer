@@ -65,11 +65,14 @@ public class Activity implements Cloneable {
     @SerializedName("attendees")
     private String Attendees;
 
+    @SerializedName("maxattention")
+    private Integer MaxAttention;
+
     public Activity() {
 
     }
 
-    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees) {
+    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees, Integer maxAttention) {
         Id = id;
         PublisherEmail = publisherEmail;
         PublisherUserPassword = publisherUserPassword;
@@ -88,6 +91,7 @@ public class Activity implements Cloneable {
         NoGood = noGood;
         Attention = attention;
         Attendees = attendees;
+        MaxAttention = maxAttention;
     }
 
     public String getId() {
@@ -232,6 +236,14 @@ public class Activity implements Cloneable {
 
     public void setAttendees(String attendees) {
         Attendees = attendees;
+    }
+
+    public Integer getMaxAttention() {
+        return MaxAttention;
+    }
+
+    public void setMaxAttention(Integer maxAttention) {
+        MaxAttention = maxAttention;
     }
 
     public boolean checkMembersStillHaveValue() {

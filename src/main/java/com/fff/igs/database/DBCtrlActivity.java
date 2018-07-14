@@ -43,6 +43,7 @@ class DBCtrlActivity {
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_NOGOOD).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append(" VARCHAR(1024) DEFAULT \'\', ");
+            strCreateTableSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append("PRIMARY KEY (").append(DBConstants.ACTIVITY_COL_ID).append(") );");
 
             try {
@@ -72,13 +73,13 @@ class DBCtrlActivity {
         return insert(activity.getPublisherEmail(), activity.getPublishBegin(), activity.getPublishEnd()
                 , activity.getLargeActivity(), activity.getEarlyBird(), activity.getDisplayName(), activity.getDateBegin()
                 , activity.getDateEnd(), activity.getLocation(), activity.getStatus(), activity.getDescription()
-                , activity.getTags());
+                , activity.getTags(), activity.getMaxAttention());
     }
 
     @SuppressWarnings("Duplicates")
     private String insert(String strPublisherEmail, String strPublishBegin, String strPublishEnd, Integer iLargeActivity
             , Integer iEarlyBird, String strDisplayName, String strDateBegin, String strDateEnd, String strLocation
-            , Integer iStatus, String strDescription, String strTags) {
+            , Integer iStatus, String strDescription, String strTags, Integer iMaxAttention) {
 
         String strResId = null;
         StringTool stringTool = new StringTool();
@@ -92,7 +93,8 @@ class DBCtrlActivity {
                 || !stringTool.checkStringNotNull(strDateBegin)
                 || !stringTool.checkStringNotNull(strDateEnd)
                 || !stringTool.checkStringNotNull(strLocation)
-                || (iStatus == null))
+                || (iStatus == null)
+                || (iMaxAttention == null))
             return null;
 
         Connection conn = DBConnection.getConnection();
@@ -110,7 +112,8 @@ class DBCtrlActivity {
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_LOCATION).append(",");
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_STATUS).append(",");
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append(",");
-        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_TAGS);
+        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_TAGS).append(",");
+        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION);
         strCreateActivitySQL.append(") VALUES (?,");
         strCreateActivitySQL.append("\"").append(strPublisherEmail).append("\",");
         strCreateActivitySQL.append("\"").append(strPublishBegin).append("\",");
@@ -123,7 +126,8 @@ class DBCtrlActivity {
         strCreateActivitySQL.append("\"").append(strLocation).append("\",");
         strCreateActivitySQL.append(iStatus).append(",");
         strCreateActivitySQL.append("\"").append(strDescription == null ? "" : strDescription).append("\",");
-        strCreateActivitySQL.append("\"").append(strTags == null ? "" : strTags).append("\"");
+        strCreateActivitySQL.append("\"").append(strTags == null ? "" : strTags).append("\",");
+        strCreateActivitySQL.append(iMaxAttention);
         strCreateActivitySQL.append(");");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -315,6 +319,7 @@ class DBCtrlActivity {
                 activity.setNoGood(rs.getInt(DBConstants.ACTIVITY_COL_NOGOOD));
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
+                activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
                 lsActivities.add(activity);
             }
         } catch (SQLException e) {
@@ -357,6 +362,7 @@ class DBCtrlActivity {
                 activity.setNoGood(rs.getInt(DBConstants.ACTIVITY_COL_NOGOOD));
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
+                activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
                 lsActivities.add(activity);
             }
         } catch (SQLException e) {
@@ -402,6 +408,7 @@ class DBCtrlActivity {
                 activity.setNoGood(rs.getInt(DBConstants.ACTIVITY_COL_NOGOOD));
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
+                activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
             }
         } catch (SQLException e) {
             LOGGER.warning("SQL erro, " + e.getMessage());
@@ -439,7 +446,8 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_LOCATION).append("=\"").append(activity.getLocation()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_STATUS).append("=").append(activity.getStatus()).append(",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append("=\"").append(activity.getDescription()).append("\",");
-        strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\"");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
         strUpdateSQL.append("\" AND ").append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail());
         strUpdateSQL.append("\";");
@@ -620,5 +628,7 @@ class DBCtrlActivity {
             newActivity.setAttention(oldActivity.getAttention());
         if (newActivity.getAttendees() == null)
             newActivity.setAttendees(oldActivity.getAttendees());
+        if (newActivity.getMaxAttention() == null)
+            newActivity.setMaxAttention(oldActivity.getMaxAttention());
     }
 }

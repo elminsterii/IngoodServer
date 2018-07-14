@@ -40,6 +40,7 @@ class DBConstants {
     static final String ACTIVITY_COL_NOGOOD = "nogood";
     static final String ACTIVITY_COL_ATTENTION = "attention";
     static final String ACTIVITY_COL_ATTENDEES = "attendees";
+    static final String ACTIVITY_COL_MAX_ATTENTION = "maxattention";
 
     //Comment constants
     static final String TABLE_NAME_COMMENT = "comments";
