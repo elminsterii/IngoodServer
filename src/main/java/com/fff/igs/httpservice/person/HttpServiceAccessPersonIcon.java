@@ -1,5 +1,7 @@
 package com.fff.igs.httpservice.person;
 
+import com.fff.igs.data.Person;
+import com.fff.igs.database.DatabaseManager;
 import com.fff.igs.server.ErrorHandler;
 import com.fff.igs.server.ServerManager;
 import com.fff.igs.server.ServerResponse;
@@ -31,6 +33,8 @@ public class HttpServiceAccessPersonIcon extends HttpServlet {
         ErrorHandler errHandler = new ErrorHandler();
 
         String strResponse;
+
+        strOwnerName = transIdToEmail(strOwnerName);
 
         if(stringTool.checkStringNotNull(strFileName)) {
             //download icon...
@@ -75,6 +79,8 @@ public class HttpServiceAccessPersonIcon extends HttpServlet {
         HttpTool httpTool = new HttpTool();
         String strOwnerName = httpTool.getOwnerName(request);
         String strFileName = httpTool.getFileName(request);
+
+        strOwnerName = transIdToEmail(strOwnerName);
         String strFullName = strOwnerName + "/" + strFileName;
 
         ServerManager serverMgr = new ServerManager();
@@ -85,5 +91,18 @@ public class HttpServiceAccessPersonIcon extends HttpServlet {
 
         response.getWriter().print(strResponse);
         response.flushBuffer();
+    }
+
+    private String transIdToEmail(String strOwnerId) {
+        String strOwnerEmail = strOwnerId;
+
+        if (strOwnerId.matches("[0-9]+")) {
+            DatabaseManager dbMgr = new DatabaseManager();
+            Person person = dbMgr.queryPerson(strOwnerId, null);
+            if(person != null) {
+                strOwnerEmail = person.getEmail();
+            }
+        }
+        return strOwnerEmail;
     }
 }
