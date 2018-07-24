@@ -261,6 +261,30 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        if(activity.getAttention() != null) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append(">=\"").append(activity.getAttention()).append("\"");
+            activity.setAttention(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
+        if(activity.getGood() != null) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_GOOD).append(">=\"").append(activity.getGood()).append("\"");
+            activity.setGood(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
+        if(stringTool.checkStringNotNull(activity.getLocation())) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_LOCATION).append(" REGEXP \'").append(activity.getLocation()).append("\'");
+            activity.setLocation(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
         if(stringTool.checkStringNotNull(activity.getDateBegin())
                 && stringTool.checkStringNotNull(activity.getDateEnd())) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append(">=\"").append(activity.getDateBegin()).append("\"");
