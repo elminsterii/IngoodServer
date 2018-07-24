@@ -261,6 +261,18 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        if(stringTool.checkStringNotNull(activity.getDateBegin())
+                && stringTool.checkStringNotNull(activity.getDateEnd())) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append(">=\"").append(activity.getDateBegin()).append("\"");
+            strSelectSQL.append(" AND ");
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEEND).append("<\"").append(activity.getDateEnd()).append("\"");
+            activity.setDateBegin(null);
+            activity.setDateEnd(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
         if(stringTool.checkStringNotNull(activity.getTags())) {
             String strRegExp = stringTool.strTagsToRegExp(activity.getTags());
             strSelectSQL.append(DBConstants.ACTIVITY_COL_TAGS).append(" REGEXP \'").append(strRegExp).append("\'");
