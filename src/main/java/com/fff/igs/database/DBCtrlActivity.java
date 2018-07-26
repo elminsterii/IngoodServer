@@ -289,7 +289,7 @@ class DBCtrlActivity {
                 && stringTool.checkStringNotNull(activity.getDateEnd())) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append(">=\"").append(activity.getDateBegin()).append("\"");
             strSelectSQL.append(" AND ");
-            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEEND).append("<\"").append(activity.getDateEnd()).append("\"");
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append("<\"").append(activity.getDateEnd()).append("\"");
             activity.setDateBegin(null);
             activity.setDateEnd(null);
 
