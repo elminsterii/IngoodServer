@@ -230,7 +230,7 @@ class DBCtrlActivity {
         strSelectSQL.append("SELECT * FROM ").append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
 
         if(stringTool.checkStringNotNull(activity.getPublisherEmail())) {
-            strSelectSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\"");
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append(" REGEXP \'").append(activity.getPublisherEmail()).append("\'");
             activity.setPublisherEmail(null);
 
             if(activity.checkMembersStillHaveValue())
@@ -254,7 +254,7 @@ class DBCtrlActivity {
         }
 
         if(stringTool.checkStringNotNull(activity.getDisplayName())) {
-            strSelectSQL.append(DBConstants.ACTIVITY_COL_DISPLAYNAME).append("=\"").append(activity.getDisplayName()).append("\"");
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DISPLAYNAME).append(" REGEXP \'").append(activity.getDisplayName()).append("\'");
             activity.setDisplayName(null);
 
             if(activity.checkMembersStillHaveValue())
