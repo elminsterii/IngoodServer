@@ -297,6 +297,15 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        if(stringTool.checkStringNotNull(activity.getAttendees())) {
+            String strRegExp = stringTool.strAttendeesToRegExp(activity.getAttendees());
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append(" REGEXP \'").append(strRegExp).append("\'");
+            activity.setAttendees(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
         if(stringTool.checkStringNotNull(activity.getTags())) {
             String strRegExp = stringTool.strTagsToRegExp(activity.getTags());
             strSelectSQL.append(DBConstants.ACTIVITY_COL_TAGS).append(" REGEXP \'").append(strRegExp).append("\'");

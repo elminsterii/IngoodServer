@@ -256,6 +256,7 @@ public class Activity implements Cloneable {
                 || (Location != null && !Location.isEmpty())
                 || (DateBegin != null && !DateBegin.isEmpty())
                 || (DateEnd != null && !DateEnd.isEmpty())
+                || (Attendees != null && !Attendees.isEmpty())
                 || (Tags != null && !Tags.isEmpty());
     }
 

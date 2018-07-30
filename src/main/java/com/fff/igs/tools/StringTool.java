@@ -32,6 +32,28 @@ public class StringTool {
         return strBuilder.toString();
     }
 
+    public String strAttendeesToRegExp(String strAttendees) {
+        if(strAttendees == null || strAttendees.isEmpty())
+            return "";
+
+        StringBuilder strBuilder = new StringBuilder();
+        String[] arrString = strAttendees.split(",");
+
+        if(arrString.length <= 0)
+            return "";
+
+        //precise compare
+        for(String str : arrString) {
+            strBuilder.append("[[:<:]]").append(str).append("[[:>:]]");
+            strBuilder.append("|");
+        }
+
+        if(strBuilder.length() > 0)
+            strBuilder.deleteCharAt(strBuilder.length()-1);
+
+        return strBuilder.toString();
+    }
+
     public boolean checkStringNotNull(String str) {
         boolean bRes = false;
         if (str != null && !str.isEmpty())
