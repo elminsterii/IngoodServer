@@ -679,6 +679,37 @@ public class ServerManager {
         return serverResp;
     }
 
+    public ServerResponse republishActivity(Activity activity) {
+        ServerResponse serverResp = new ServerResponse();
+        ServerResponse.STATUS_CODE resCode;
+
+        if (activity != null) {
+            DatabaseManager dbMgr = getDatabaseManager();
+
+            if(dbMgr.checkPersonValid(activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
+                if (dbMgr.checkActivityExist(activity)) {
+                    ActivityMaintainer am = new ActivityMaintainer();
+                    am.maintain(activity);
+
+                    if (dbMgr.republishActivity(activity)) {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                    } else {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_INVALID_DATA;
+                    }
+                } else {
+                    resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
+                }
+            } else {
+                resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_INVALID;
+            }
+        } else {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_JSON_FORMAT_WRONG;
+        }
+
+        serverResp.setStatus(resCode);
+        return serverResp;
+    }
+
     public ServerResponse deleteActivityImage(JsonObject jsonSource) throws IOException {
         ServerResponse serverResp = new ServerResponse();
         ServerResponse.STATUS_CODE resCode;

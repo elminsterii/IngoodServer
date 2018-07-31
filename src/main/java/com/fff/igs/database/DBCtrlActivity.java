@@ -509,6 +509,54 @@ class DBCtrlActivity {
         return bRes;
     }
 
+    boolean republish(Activity activity) {
+        boolean bRes = false;
+        StringTool stringTool = new StringTool();
+
+        if (!stringTool.checkStringNotNull(activity.getId()))
+            return false;
+
+        Activity oldActivity = queryById(activity.getId());
+
+        if (oldActivity == null)
+            return false;
+
+        fillUpdateActivityIfNull(oldActivity, activity);
+
+        Connection conn = DBConnection.getConnection();
+        StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
+        strUpdateSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" SET ");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHBEGIN).append("=\"").append(activity.getPublishBegin()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEND).append("=\"").append(activity.getPublishEnd()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_LARGEACTIVITY).append("=").append(activity.getLargeActivity()).append(",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_EARLYBIRD).append("=").append(activity.getEarlyBird()).append(",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_DISPLAYNAME).append("=\"").append(activity.getDisplayName()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append("=\"").append(activity.getDateBegin()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_DATEEND).append("=\"").append(activity.getDateEnd()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_LOCATION).append("=\"").append(activity.getLocation()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_STATUS).append("=").append(activity.getStatus()).append(",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append("=\"").append(activity.getDescription()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append("=").append("\"0\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append("=").append("\"\"");
+        strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
+        strUpdateSQL.append("\" AND ").append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail());
+        strUpdateSQL.append("\";");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try (PreparedStatement statementUpdateActivity = conn.prepareStatement(strUpdateSQL.toString())) {
+            bRes = statementUpdateActivity.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.warning("SQL erro, " + e.getMessage());
+        }
+
+        LOGGER.info("update time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        return bRes;
+    }
+
     @SuppressWarnings("Duplicates")
     boolean attend(String strActivityId, Integer iAttend, String strPersonId) {
         boolean bRes = false;
