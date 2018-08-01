@@ -277,6 +277,14 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        if(activity.getStatus() != null) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_STATUS).append(">=\"").append(activity.getStatus()).append("\"");
+            activity.setStatus(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
         if(stringTool.checkStringNotNull(activity.getLocation())) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_LOCATION).append(" REGEXP \'").append(activity.getLocation()).append("\'");
             activity.setLocation(null);
