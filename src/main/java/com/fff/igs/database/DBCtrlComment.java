@@ -30,7 +30,8 @@ class DBCtrlComment {
             strCreateTableSQL.append(DBConstants.COMMENT_COL_PUBLISHEREMAIL).append(" VARCHAR(128) NOT NULL, ");
             strCreateTableSQL.append(DBConstants.COMMENT_COL_DISPLAYNAME).append(" VARCHAR(64) NOT NULL, ");
             strCreateTableSQL.append(DBConstants.COMMENT_COL_ACTIVITYID).append(" VARCHAR(16) NOT NULL, ");
-            strCreateTableSQL.append(DBConstants.COMMENT_COL_CONTENT).append(" VARCHAR(512) NOT NULL, ");
+            strCreateTableSQL.append(DBConstants.COMMENT_COL_CONTENT).append(" VARCHAR(1024) NOT NULL, ");
+            strCreateTableSQL.append(DBConstants.COMMENT_COL_RESERVED).append(" VARCHAR(1024), ");
             strCreateTableSQL.append("PRIMARY KEY (").append(DBConstants.COMMENT_COL_ID).append(") );");
 
             try {
@@ -106,14 +107,17 @@ class DBCtrlComment {
         return strResId;
     }
 
-    boolean delete(Comment comment) {
+    boolean delete(Comment oriComment) {
         boolean bRes = false;
         StringTool stringTool = new StringTool();
 
-        if (!stringTool.checkStringNotNull(comment.getId())
-                && !stringTool.checkStringNotNull(comment.getActivityId())
-                && !stringTool.checkStringNotNull(comment.getPublisherEmail()))
+        if (oriComment != null
+                && !stringTool.checkStringNotNull(oriComment.getId())
+                && !stringTool.checkStringNotNull(oriComment.getActivityId())
+                && !stringTool.checkStringNotNull(oriComment.getPublisherEmail()))
             return false;
+
+        Comment comment = new Comment(oriComment);
 
         Connection conn = DBConnection.getConnection();
         StringBuilder strDeleteCommentSQL = new StringBuilder("DELETE FROM ");
@@ -152,12 +156,13 @@ class DBCtrlComment {
         return bRes;
     }
 
-    List<String> query(Comment comment) {
+    List<String> query(Comment oriComment) {
         List<String> lsIds = new ArrayList<>();
 
-        if (comment == null)
+        if (oriComment == null)
             return lsIds;
 
+        Comment comment = new Comment(oriComment);
         StringTool stringTool = new StringTool();
 
         Connection conn = DBConnection.getConnection();

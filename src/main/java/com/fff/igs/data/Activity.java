@@ -68,11 +68,36 @@ public class Activity implements Cloneable {
     @SerializedName("maxattention")
     private Integer MaxAttention;
 
-    public Activity() {
+    @SerializedName("savers")
+    private String Savers;
 
+    public Activity() {
     }
 
-    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees, Integer maxAttention) {
+    public Activity(Activity activity) {
+        Id = activity.getId();
+        PublisherEmail = activity.getPublisherEmail();
+        PublisherUserPassword = activity.getPublisherUserPassword();
+        PublishBegin = activity.getPublishBegin();
+        PublishEnd = activity.getPublishEnd();
+        LargeActivity = activity.getLargeActivity();
+        EarlyBird = activity.getEarlyBird();
+        DisplayName = activity.getDisplayName();
+        DateBegin = activity.getDateBegin();
+        DateEnd = activity.getDateEnd();
+        Location = activity.getLocation();
+        Status = activity.getStatus();
+        Description = activity.getDescription();
+        Tags = activity.getTags();
+        Good = activity.getGood();
+        NoGood = activity.getNoGood();
+        Attention = activity.getAttention();
+        Attendees = activity.getAttendees();
+        MaxAttention = activity.getMaxAttention();
+        Savers = activity.getSavers();
+    }
+
+    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees, Integer maxAttention, String savers) {
         Id = id;
         PublisherEmail = publisherEmail;
         PublisherUserPassword = publisherUserPassword;
@@ -92,6 +117,7 @@ public class Activity implements Cloneable {
         Attention = attention;
         Attendees = attendees;
         MaxAttention = maxAttention;
+        Savers = savers;
     }
 
     public String getId() {
@@ -244,6 +270,14 @@ public class Activity implements Cloneable {
 
     public void setMaxAttention(Integer maxAttention) {
         MaxAttention = maxAttention;
+    }
+
+    public String getSavers() {
+        return Savers;
+    }
+
+    public void setSavers(String savers) {
+        Savers = savers;
     }
 
     public boolean checkMembersStillHaveValue() {

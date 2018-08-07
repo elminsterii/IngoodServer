@@ -29,9 +29,9 @@ class DBCtrlPerson {
             strCreateTableSQL.append(DBConstants.PERSON_COL_TS).append(" timestamp NOT NULL, ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_EMAIL).append(" VARCHAR(128) NOT NULL, ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_USERPASSWORD).append(" VARCHAR(64) NOT NULL, ");
-            strCreateTableSQL.append(DBConstants.PERSON_COL_DISPLAYNAME).append(" VARCHAR(64) NOT NULL, ");
-            strCreateTableSQL.append(DBConstants.PERSON_COL_AGE).append(" TINYINT UNSIGNED NOT NULL, ");
-            strCreateTableSQL.append(DBConstants.PERSON_COL_GENDER).append(" CHAR(8) NOT NULL, ");
+            strCreateTableSQL.append(DBConstants.PERSON_COL_DISPLAYNAME).append(" VARCHAR(64), ");
+            strCreateTableSQL.append(DBConstants.PERSON_COL_AGE).append(" TINYINT UNSIGNED, ");
+            strCreateTableSQL.append(DBConstants.PERSON_COL_GENDER).append(" CHAR(8), ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_INTERESTS).append(" VARCHAR(512), ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_DESCRIPTION).append(" VARCHAR(1024), ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_LOCATION).append(" VARCHAR(128), ");
@@ -40,6 +40,7 @@ class DBCtrlPerson {
             strCreateTableSQL.append(DBConstants.PERSON_COL_NOGOOD).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_ONLINE).append(" TINYINT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.PERSON_COL_ANONYMOUS).append(" TINYINT UNSIGNED NOT NULL DEFAULT 0, ");
+            strCreateTableSQL.append(DBConstants.PERSON_COL_RESERVED).append(" VARCHAR(1024), ");
             strCreateTableSQL.append("PRIMARY KEY (").append(DBConstants.PERSON_COL_EMAIL).append(") );");
 
             try {
@@ -82,10 +83,7 @@ class DBCtrlPerson {
         StringTool stringTool = new StringTool();
 
         if (!stringTool.checkStringNotNull(strEmail)
-                || !stringTool.checkStringNotNull(strUserPassword)
-                || !stringTool.checkStringNotNull(strDisplayName)
-                || (iAge == null)
-                || !stringTool.checkStringNotNull(strGender))
+                || !stringTool.checkStringNotNull(strUserPassword))
             return false;
 
         Connection conn = DBConnection.getConnection();
@@ -108,9 +106,9 @@ class DBCtrlPerson {
         strCreatePersonSQL.append("VALUES (?");
         strCreatePersonSQL.append(",\"").append(strEmail).append("\"");
         strCreatePersonSQL.append(",\"").append(strUserPassword).append("\"");
-        strCreatePersonSQL.append(",\"").append(strDisplayName).append("\"");
-        strCreatePersonSQL.append(",\"").append(iAge).append("\"");
-        strCreatePersonSQL.append(",\"").append(strGender).append("\"");
+        strCreatePersonSQL.append(",\"").append(strDisplayName == null ? "" : strDisplayName).append("\"");
+        strCreatePersonSQL.append(",\"").append(iAge == null ? 0 : iAge).append("\"");
+        strCreatePersonSQL.append(",\"").append(strGender == null ? "" : strGender).append("\"");
         strCreatePersonSQL.append(",\"").append(strInterests == null ? "" : strInterests).append("\"");
         strCreatePersonSQL.append(",\"").append(strDescription == null ? "" : strDescription).append("\"");
         strCreatePersonSQL.append(",\"").append(strLocation == null ? "" : strLocation).append("\"");
@@ -394,7 +392,7 @@ class DBCtrlPerson {
                 || !stringTool.checkStringNotNull(strEmail))
             return false;
 
-        String strSaveActivities = querySaveActivities(strEmail);
+        String strSaveActivities = querySaveActivities(strEmail, null);
 
         final int INT_IS_SAVE = 1;
 
@@ -443,19 +441,82 @@ class DBCtrlPerson {
         return bRes;
     }
 
-    private String querySaveActivities(String strEmail) {
+    @SuppressWarnings("Duplicates")
+    boolean saveActivityById(String strPersonId, String strActivityId, Integer iIsSave) {
+        boolean bRes = false;
+        StringTool stringTool = new StringTool();
+
+        if (!stringTool.checkStringNotNull(strActivityId)
+                || iIsSave == null
+                || !stringTool.checkStringNotNull(strPersonId))
+            return false;
+
+        String strSaveActivities = querySaveActivities(null, strPersonId);
+
+        final int INT_IS_SAVE = 1;
+
+        //handle attendees string.
+        if(iIsSave == INT_IS_SAVE) {
+            if(stringTool.checkStringNotNull(strSaveActivities)) {
+                String[] arrSaveActivities = strSaveActivities.split(",");
+                for (String strSaveActivity : arrSaveActivities) {
+                    if (strSaveActivity.equals(strActivityId))
+                        return false;
+                }
+                strSaveActivities = strSaveActivities + "," + strActivityId;
+            }
+            else
+                strSaveActivities = strActivityId;
+        } else {
+            if(stringTool.checkStringNotNull(strSaveActivities)) {
+                String[] arrSaveActivities = strSaveActivities.split(",");
+                for(int i=0; i< arrSaveActivities.length; i++) {
+                    if(arrSaveActivities[i].equals(strActivityId)) {
+                        arrSaveActivities[i] = null;
+                        break;
+                    }
+                }
+                strSaveActivities = stringTool.arrayStringToString(arrSaveActivities, ',');
+            } else
+                return false;
+        }
+
+        Connection conn = DBConnection.getConnection();
+        StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
+        strUpdateSQL.append(DBConstants.TABLE_NAME_PERSON).append(" SET ");
+        strUpdateSQL.append(DBConstants.PERSON_COL_SAVEACTIVITIES).append("=\"").append(strSaveActivities).append("\"");
+        strUpdateSQL.append(" WHERE ").append(DBConstants.PERSON_COL_ID).append("=\"").append(strPersonId);
+        strUpdateSQL.append("\";");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try (PreparedStatement statementUpdateActivity = conn.prepareStatement(strUpdateSQL.toString())) {
+            bRes = statementUpdateActivity.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.warning("SQL erro, " + e.getMessage());
+        }
+
+        LOGGER.info("update time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        return bRes;
+    }
+
+    private String querySaveActivities(String strEmail, String strPersonId) {
         String strSaveActivities = "";
 
         StringTool stringTool = new StringTool();
 
-        if (!stringTool.checkStringNotNull(strEmail))
+        if (!stringTool.checkStringNotNull(strEmail)
+                && !stringTool.checkStringNotNull(strPersonId))
             return null;
 
         Connection conn = DBConnection.getConnection();
         StringBuilder strSelectSQL = new StringBuilder("SELECT ");
         strSelectSQL.append(DBConstants.PERSON_COL_SAVEACTIVITIES).append(" FROM ");
         strSelectSQL.append(DBConstants.TABLE_NAME_PERSON).append(" WHERE ");
-        strSelectSQL.append(DBConstants.PERSON_COL_EMAIL).append("=\"").append(strEmail).append("\";");
+        if(stringTool.checkStringNotNull(strEmail))
+            strSelectSQL.append(DBConstants.PERSON_COL_EMAIL).append("=\"").append(strEmail).append("\";");
+        else if(stringTool.checkStringNotNull(strPersonId))
+            strSelectSQL.append(DBConstants.PERSON_COL_ID).append("=\"").append(strPersonId).append("\";");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
         try (ResultSet rs = conn.prepareStatement(strSelectSQL.toString()).executeQuery()) {

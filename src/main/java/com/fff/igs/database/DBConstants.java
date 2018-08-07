@@ -19,6 +19,7 @@ class DBConstants {
     static final String PERSON_COL_NOGOOD = "nogood";
     static final String PERSON_COL_ONLINE = "online";
     static final String PERSON_COL_ANONYMOUS = "anonymous";
+    static final String PERSON_COL_RESERVED = "reserved";
 
     //Activity constants
     static final String TABLE_NAME_ACTIVITY = "activities";
@@ -41,6 +42,8 @@ class DBConstants {
     static final String ACTIVITY_COL_ATTENTION = "attention";
     static final String ACTIVITY_COL_ATTENDEES = "attendees";
     static final String ACTIVITY_COL_MAX_ATTENTION = "maxattention";
+    static final String ACTIVITY_COL_SAVERS = "savers";
+    static final String ACTIVITY_COL_RESERVED = "reserved";
 
     //Comment constants
     static final String TABLE_NAME_COMMENT = "comments";
@@ -50,6 +53,7 @@ class DBConstants {
     static final String COMMENT_COL_DISPLAYNAME = "displayname";
     static final String COMMENT_COL_ACTIVITYID = "activityid";
     static final String COMMENT_COL_CONTENT = "content";
+    static final String COMMENT_COL_RESERVED = "reserved";
 
     //VerifyEmail constants
     static final String TABLE_NAME_VERIFYEMAIL = "verifyemails";

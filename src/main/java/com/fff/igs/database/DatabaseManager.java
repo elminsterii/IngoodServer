@@ -3,6 +3,7 @@ package com.fff.igs.database;
 import com.fff.igs.data.Activity;
 import com.fff.igs.data.Comment;
 import com.fff.igs.data.Person;
+import com.fff.igs.tools.StringTool;
 
 import java.util.List;
 
@@ -81,8 +82,12 @@ public class DatabaseManager {
         return getDBCtrlPerson().checkPersonExist(strEmail);
     }
 
-    public boolean saveActivity(String strEmail, String strActivityId, Integer iIsSave) {
+    public boolean savePersonActivity(String strEmail, String strActivityId, Integer iIsSave) {
         return getDBCtrlPerson().saveActivity(strEmail, strActivityId, iIsSave);
+    }
+
+    public boolean savePersonActivityById(String strPersonId, String strActivityId, Integer iIsSave) {
+        return getDBCtrlPerson().saveActivityById(strPersonId, strActivityId, iIsSave);
     }
 
     // --------------------------------- Activity control functions ---------------------------------
@@ -91,7 +96,45 @@ public class DatabaseManager {
     }
 
     public boolean deleteActivity(Activity activity) {
+        StringTool stringTool = new StringTool();
+
+        if(stringTool.checkStringNotNull(activity.getId())) {
+            //delete one activity by id.
+            //cancel savers.
+            List<Activity> lsActivities = queryActivityByIds(activity.getId());
+            if(lsActivities != null && !lsActivities.isEmpty())
+                cancelActivitySaver(lsActivities.get(0).getSavers(), activity.getId());
+
+            //delete comments
+            Comment comment = new Comment();
+            comment.setActivityId(activity.getId());
+            deleteComment(comment);
+        } else if(stringTool.checkStringNotNull(activity.getPublisherEmail())) {
+            //delete all activities by publisher email.
+            //cancel savers.
+            List<String> lsActivitiesId = queryActivity(activity);
+            String strActivitiesId = stringTool.listStringToString(lsActivitiesId, ',');
+            List<Activity> lsActivities = queryActivityByIds(strActivitiesId);
+            for(Activity act : lsActivities)
+                cancelActivitySaver(act.getSavers(), act.getId());
+
+            //delete comments
+            Comment comment = new Comment();
+            comment.setPublisherEmail(activity.getPublisherEmail());
+            deleteComment(comment);
+        }
         return getDBCtrlActivity().delete(activity);
+    }
+
+    private void cancelActivitySaver(String strSavers, String strActivityId) {
+        //delete saver information in person table.
+        StringTool stringTool = new StringTool();
+        if(stringTool.checkStringNotNull(strSavers)) {
+            final Integer CANCEL_SAVE = 0;
+            String[] arrSavers = strSavers.split(",");
+            for(String strSaver : arrSavers)
+                savePersonActivityById(strSaver, strActivityId, CANCEL_SAVE);
+        }
     }
 
     public List<Activity> queryActivityByIds(String strIds) {
@@ -116,6 +159,10 @@ public class DatabaseManager {
 
     public boolean attendActivity(String strActivityId, Integer iAttend, String strPersonId) {
         return getDBCtrlActivity().attend(strActivityId, iAttend, strPersonId);
+    }
+
+    public boolean saveActivity(String strPersonId, String strActivityId, Integer iSave) {
+        return getDBCtrlActivity().save(strPersonId, strActivityId, iSave);
     }
 
     public boolean deemActivity(String strActivityId, Integer iDeem, Integer iDeemRb) {

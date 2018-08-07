@@ -43,6 +43,8 @@ class DBCtrlActivity {
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_NOGOOD).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append(" VARCHAR(1024) DEFAULT \'\', ");
+            strCreateTableSQL.append(DBConstants.ACTIVITY_COL_SAVERS).append(" VARCHAR(1024) DEFAULT \'\', ");
+            strCreateTableSQL.append(DBConstants.ACTIVITY_COL_RESERVED).append(" VARCHAR(1024) DEFAULT \'\', ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append("PRIMARY KEY (").append(DBConstants.ACTIVITY_COL_ID).append(") );");
 
@@ -217,12 +219,13 @@ class DBCtrlActivity {
         return bRes;
     }
 
-    List<String> query(Activity activity) {
+    List<String> query(Activity oriActivity) {
         List<String> lsIds = new ArrayList<>();
 
-        if (activity == null)
+        if (oriActivity == null)
             return lsIds;
 
+        Activity activity = new Activity(oriActivity);
         StringTool stringTool = new StringTool();
 
         Connection conn = DBConnection.getConnection();
@@ -373,6 +376,7 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
                 lsActivities.add(activity);
             }
         } catch (SQLException e) {
@@ -416,6 +420,7 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
                 lsActivities.add(activity);
             }
         } catch (SQLException e) {
@@ -462,6 +467,7 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
             }
         } catch (SQLException e) {
             LOGGER.warning("SQL erro, " + e.getMessage());
@@ -577,16 +583,16 @@ class DBCtrlActivity {
 
         final int INT_ATTENDED = 1;
 
-        Activity acticity = queryAttendInfo(strActivityId);
+        Activity activity = queryAttendInfo(strActivityId);
 
-        if(acticity == null)
+        if(activity == null)
             return false;
 
-        String strNewAttendees = acticity.getAttendees();
+        String strNewAttendees = activity.getAttendees();
 
         //handle attendees string.
         if(iAttend == INT_ATTENDED) {
-            if(acticity.getAttention() >= acticity.getMaxAttention())
+            if(activity.getAttention() >= activity.getMaxAttention())
                 return false;
 
             if(stringTool.checkStringNotNull(strNewAttendees)) {
@@ -620,6 +626,70 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append("=").append(DBConstants.ACTIVITY_COL_ATTENTION);
         strUpdateSQL.append(iAttend == INT_ATTENDED ? "+1," : "-1,");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append("=\"").append(strNewAttendees).append("\"");
+        strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strActivityId);
+        strUpdateSQL.append("\";");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try (PreparedStatement statementUpdateActivity = conn.prepareStatement(strUpdateSQL.toString())) {
+            bRes = statementUpdateActivity.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.warning("SQL erro, " + e.getMessage());
+        }
+
+        LOGGER.info("update time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        return bRes;
+    }
+
+    boolean save(String strPersonId, String strActivityId, Integer iSave) {
+        boolean bRes = false;
+        StringTool stringTool = new StringTool();
+
+        if (!stringTool.checkStringNotNull(strActivityId)
+                || iSave == null
+                || !stringTool.checkStringNotNull(strPersonId))
+            return false;
+
+        final int INT_SAVED = 1;
+
+        Activity activity = queryById(strActivityId);
+
+        if(activity == null)
+            return false;
+
+        String strSavers = activity.getSavers();
+
+        //handle saver string.
+        if(iSave == INT_SAVED) {
+            if(stringTool.checkStringNotNull(strSavers)) {
+                String[] arrSavers = strSavers.split(",");
+                for (String strSaver : arrSavers) {
+                    if (strSaver.equals(strPersonId))
+                        return false;
+                }
+
+                strSavers = strSavers + "," + strPersonId;
+            }
+            else
+                strSavers = strPersonId;
+        } else {
+            if(stringTool.checkStringNotNull(strSavers)) {
+                String[] arrSavers = strSavers.split(",");
+                for(int i=0; i< arrSavers.length; i++) {
+                    if(arrSavers[i].equals(strPersonId)) {
+                        arrSavers[i] = null;
+                        break;
+                    }
+                }
+                strSavers = stringTool.arrayStringToString(arrSavers, ',');
+            } else
+                return false;
+        }
+
+        Connection conn = DBConnection.getConnection();
+        StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
+        strUpdateSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" SET ");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_SAVERS).append("=\"").append(strSavers).append("\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strActivityId);
         strUpdateSQL.append("\";");
 
@@ -747,5 +817,7 @@ class DBCtrlActivity {
             newActivity.setAttendees(oldActivity.getAttendees());
         if (newActivity.getMaxAttention() == null)
             newActivity.setMaxAttention(oldActivity.getMaxAttention());
+        if (newActivity.getSavers() == null)
+            newActivity.setSavers(oldActivity.getSavers());
     }
 }

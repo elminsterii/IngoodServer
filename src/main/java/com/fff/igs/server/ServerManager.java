@@ -119,11 +119,6 @@ public class ServerManager {
                     //delete all activities belong the user after unregister success.
                     dbMgr.deleteActivity(activity);
 
-                    //delete all comments belong the user after unregister success.
-                    Comment comment = new Comment();
-                    comment.setPublisherEmail(person.getEmail());
-                    dbMgr.deleteComment(comment);
-
                     resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
                 } else {
                     resCode = ServerResponse.STATUS_CODE.ST_CODE_INVALID_DATA;
@@ -319,8 +314,12 @@ public class ServerManager {
 
                 if(dbMgr.checkPersonExist(strEmail)) {
                     if (dbMgr.checkActivityExist(strActivityId)) {
-                        if (dbMgr.saveActivity(strEmail, strActivityId, iIsSave)) {
-                            resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                        if (dbMgr.savePersonActivity(strEmail, strActivityId, iIsSave)) {
+                            Person person = dbMgr.queryPerson(null, strEmail);
+                            if(person != null && dbMgr.saveActivity(person.getId(), strActivityId, iIsSave))
+                                resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                            else
+                                resCode = ServerResponse.STATUS_CODE.ST_CODE_FAIL_SAVE_OR_FAIL_CANCEL;
                         } else {
                             resCode = ServerResponse.STATUS_CODE.ST_CODE_FAIL_SAVE_OR_FAIL_CANCEL;
                         }
@@ -538,11 +537,6 @@ public class ServerManager {
                                 csMgr.deleteActivityImages(strId, true);
                         }
 
-                        //delete all comments belong the activity after deleteActivity.
-                        Comment comment = new Comment();
-                        comment.setActivityId(activity.getId());
-                        dbMgr.deleteComment(comment);
-
                         resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
                     } else {
                         resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
@@ -551,11 +545,6 @@ public class ServerManager {
                     //delete one activity by id.
                     if (dbMgr.deleteActivity(activity)) {
                         csMgr.deleteActivityImages(activity.getId(), true);
-
-                        //delete all comments belong the activity after deleteActivity.
-                        Comment comment = new Comment();
-                        comment.setActivityId(activity.getId());
-                        dbMgr.deleteComment(comment);
 
                         resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
                     } else {

@@ -25,6 +25,15 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(Comment comment) {
+        Id = comment.getId();
+        Ts = comment.getTs();
+        PublisherEmail = comment.getPublisherEmail();
+        DisplayName = comment.getDisplayName();
+        ActivityId = comment.getActivityId();
+        Content = comment.getContent();
+    }
+
     public Comment(String id, String ts, String publisherEmail, String displayName, String activityId, String content) {
         Id = id;
         Ts = ts;

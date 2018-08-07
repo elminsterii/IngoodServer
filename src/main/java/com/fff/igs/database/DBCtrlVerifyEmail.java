@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static com.fff.igs.server.GlobalProperty.VERIFY_CODE_FOR_FACEBOOK_SIGN;
+import static com.fff.igs.server.GlobalProperty.VERIFY_CODE_FOR_GOOGLE_SIGN;
+
 class DBCtrlVerifyEmail {
     private static final Logger LOGGER = Logger.getLogger(DBCtrlVerifyEmail.class.getName());
 
@@ -179,7 +182,9 @@ class DBCtrlVerifyEmail {
 
     boolean verify(String strEmail, String strCode) {
         //@@@ test
-        if(strCode != null && strCode.equals("5454"))
+        if(strCode != null
+                && (strCode.equals(VERIFY_CODE_FOR_GOOGLE_SIGN)
+                || strCode.equals(VERIFY_CODE_FOR_FACEBOOK_SIGN)))
             return true;
 
         StringTool stringTool = new StringTool();
