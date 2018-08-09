@@ -264,17 +264,21 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        boolean bIsOrderByAttention = false;
         if(activity.getAttention() != null) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append(">=\"").append(activity.getAttention()).append("\"");
             activity.setAttention(null);
+            bIsOrderByAttention = true;
 
             if(activity.checkMembersStillHaveValue())
                 strSelectSQL.append(" AND ");
         }
 
+        boolean bIsOrderByGood = false;
         if(activity.getGood() != null) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_GOOD).append(">=\"").append(activity.getGood()).append("\"");
             activity.setGood(null);
+            bIsOrderByGood = true;
 
             if(activity.checkMembersStillHaveValue())
                 strSelectSQL.append(" AND ");
@@ -321,6 +325,11 @@ class DBCtrlActivity {
             String strRegExp = stringTool.strTagsToRegExp(activity.getTags());
             strSelectSQL.append(DBConstants.ACTIVITY_COL_TAGS).append(" REGEXP \'").append(strRegExp).append("\'");
         }
+
+        if(bIsOrderByAttention)
+            strSelectSQL.append(" ORDER BY ").append(DBConstants.ACTIVITY_COL_ATTENTION).append(" DESC");
+        else if(bIsOrderByGood)
+            strSelectSQL.append(" ORDER BY ").append(DBConstants.ACTIVITY_COL_GOOD).append(" DESC");
 
         strSelectSQL.append(";");
 
