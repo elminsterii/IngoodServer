@@ -359,7 +359,8 @@ class DBCtrlActivity {
         Connection conn = DBConnection.getConnection();
         StringBuilder strSelectSQL = new StringBuilder("SELECT * FROM ");
         strSelectSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
-        strSelectSQL.append(DBConstants.ACTIVITY_COL_ID).append(" IN (").append(strIds).append(");");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_ID).append(" IN (").append(strIds).append(") ");
+        strSelectSQL.append("ORDER BY field(").append(DBConstants.ACTIVITY_COL_ID).append(",").append(strIds).append(");");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
         try (ResultSet rs = conn.prepareStatement(strSelectSQL.toString()).executeQuery()) {
