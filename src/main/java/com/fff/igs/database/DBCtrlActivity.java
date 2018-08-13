@@ -302,11 +302,24 @@ class DBCtrlActivity {
 
         if(stringTool.checkStringNotNull(activity.getDateBegin())
                 && stringTool.checkStringNotNull(activity.getDateEnd())) {
+
+            //collect all activities begin during special time.
             strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append(">=\"").append(activity.getDateBegin()).append("\"");
             strSelectSQL.append(" AND ");
             strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append("<\"").append(activity.getDateEnd()).append("\"");
             activity.setDateBegin(null);
             activity.setDateEnd(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        } else if(stringTool.checkStringNotNull(activity.getDateBegin())
+                && !stringTool.checkStringNotNull(activity.getDateEnd())) {
+
+            //find all activities ongoing.
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEBEGIN).append("<=\"").append(activity.getDateBegin()).append("\"");
+            strSelectSQL.append(" AND ");
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_DATEEND).append(">=\"").append(activity.getDateBegin()).append("\"");
+            activity.setDateBegin(null);
 
             if(activity.checkMembersStillHaveValue())
                 strSelectSQL.append(" AND ");
