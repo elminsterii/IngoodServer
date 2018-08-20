@@ -543,10 +543,14 @@ public class ServerManager {
                     }
                 } else {
                     //delete one activity by id.
-                    if (dbMgr.deleteActivity(activity)) {
-                        csMgr.deleteActivityImages(activity.getId(), true);
+                    if(dbMgr.checkActivityOwner(activity.getId(), activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
+                        if (dbMgr.deleteActivity(activity)) {
+                            csMgr.deleteActivityImages(activity.getId(), true);
 
-                        resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                        } else {
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
+                        }
                     } else {
                         resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
                     }
@@ -645,7 +649,7 @@ public class ServerManager {
             DatabaseManager dbMgr = getDatabaseManager();
 
             if(dbMgr.checkPersonValid(activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
-                if (dbMgr.checkActivityExist(activity)) {
+                if (dbMgr.checkActivityOwner(activity.getId(), activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
                     ActivityMaintainer am = new ActivityMaintainer();
                     am.maintain(activity);
 
@@ -676,7 +680,7 @@ public class ServerManager {
             DatabaseManager dbMgr = getDatabaseManager();
 
             if(dbMgr.checkPersonValid(activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
-                if (dbMgr.checkActivityExist(activity)) {
+                if (dbMgr.checkActivityOwner(activity.getId(), activity.getPublisherEmail(), activity.getPublisherUserPassword())) {
                     ActivityMaintainer am = new ActivityMaintainer();
                     am.maintain(activity);
 

@@ -1,6 +1,7 @@
 package com.fff.igs.startup;
 
 import com.fff.igs.gcs.StorageManager;
+import com.fff.igs.server.GlobalProperty;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -16,6 +17,7 @@ public class StartStopListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         StorageManager sm = new StorageManager();
         sm.initialize();
+        GlobalProperty.initialize();
 
         System.out.println("System has been started.");
         LOGGER.info("System has been started.");

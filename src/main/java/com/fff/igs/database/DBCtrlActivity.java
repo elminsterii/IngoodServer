@@ -172,14 +172,9 @@ class DBCtrlActivity {
         StringBuilder strDeleteActivitySQL = new StringBuilder("DELETE FROM ");
         strDeleteActivitySQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
 
-        if(stringTool.checkStringNotNull(strId)) {
+        if(stringTool.checkStringNotNull(strId))
             strDeleteActivitySQL.append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strId);
-
-            if(stringTool.checkStringNotNull(strPublisherEmail))
-                strDeleteActivitySQL.append("\" AND ");
-        }
-
-        if(stringTool.checkStringNotNull(strPublisherEmail))
+        else if(stringTool.checkStringNotNull(strPublisherEmail))
             strDeleteActivitySQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(strPublisherEmail);
 
         strDeleteActivitySQL.append("\";");
@@ -207,6 +202,31 @@ class DBCtrlActivity {
         StringBuilder strSelectSQL = new StringBuilder("SELECT * FROM ");
         strSelectSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
         strSelectSQL.append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strId).append("\";");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try (PreparedStatement statementSelectActivity = conn.prepareStatement(strSelectSQL.toString())) {
+            bRes = statementSelectActivity.executeQuery().first();
+        } catch (SQLException e) {
+            LOGGER.warning("SQL erro, " + e.getMessage());
+        }
+
+        LOGGER.info("check time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        return bRes;
+    }
+
+    boolean checkActivityOwner(String strActivityId, String strEmail) {
+        boolean bRes = false;
+        StringTool stringTool = new StringTool();
+
+        if (!stringTool.checkStringNotNull(strActivityId)
+                || !stringTool.checkStringNotNull(strEmail))
+            return false;
+
+        Connection conn = DBConnection.getConnection();
+        StringBuilder strSelectSQL = new StringBuilder("SELECT * FROM ");
+        strSelectSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" WHERE ");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strActivityId).append("\" AND ");
+        strSelectSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(strEmail).append("\";");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
         try (PreparedStatement statementSelectActivity = conn.prepareStatement(strSelectSQL.toString())) {
@@ -517,7 +537,7 @@ class DBCtrlActivity {
         Connection conn = DBConnection.getConnection();
         StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
         strUpdateSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" SET ");
-        strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\",");
+        //strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHBEGIN).append("=\"").append(activity.getPublishBegin()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEND).append("=\"").append(activity.getPublishEnd()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_LARGEACTIVITY).append("=").append(activity.getLargeActivity()).append(",");
@@ -531,7 +551,6 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
-        strUpdateSQL.append("\" AND ").append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail());
         strUpdateSQL.append("\";");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -563,7 +582,7 @@ class DBCtrlActivity {
         Connection conn = DBConnection.getConnection();
         StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
         strUpdateSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" SET ");
-        strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\",");
+        //strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHBEGIN).append("=\"").append(activity.getPublishBegin()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_PUBLISHEND).append("=\"").append(activity.getPublishEnd()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_LARGEACTIVITY).append("=").append(activity.getLargeActivity()).append(",");
@@ -579,7 +598,6 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append("=").append("\"0\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append("=").append("\"\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
-        strUpdateSQL.append("\" AND ").append(DBConstants.ACTIVITY_COL_PUBLISHEREMAIL).append("=\"").append(activity.getPublisherEmail());
         strUpdateSQL.append("\";");
 
         Stopwatch stopwatch = Stopwatch.createStarted();

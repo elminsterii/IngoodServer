@@ -3,6 +3,7 @@ package com.fff.igs.database;
 import com.fff.igs.data.Activity;
 import com.fff.igs.data.Comment;
 import com.fff.igs.data.Person;
+import com.fff.igs.server.GlobalProperty;
 import com.fff.igs.tools.StringTool;
 
 import java.util.List;
@@ -67,10 +68,16 @@ public class DatabaseManager {
     }
 
     public boolean checkPersonValid(String strEmail, String strUserPassword) {
+        if(checkIsAdminAccount(strEmail, strUserPassword))
+            return true;
+
         return getDBCtrlPerson().checkPersonValid(strEmail, strUserPassword);
     }
 
     public boolean checkPersonValid(Person person) {
+        if(checkIsAdminAccount(person.getEmail(), person.getUserPassword()))
+            return true;
+
         return getDBCtrlPerson().checkPersonValid(person.getEmail(), person.getUserPassword());
     }
 
@@ -177,6 +184,13 @@ public class DatabaseManager {
         return getDBCtrlActivity().checkActivityExist(strId);
     }
 
+    public boolean checkActivityOwner(String strActivityId, String strEmail, String strPassword) {
+        if(checkIsAdminAccount(strEmail, strPassword))
+            return true;
+
+        return getDBCtrlActivity().checkActivityOwner(strActivityId, strEmail);
+    }
+
 
     // --------------------------------- Comment control functions ---------------------------------
     public String createComment(Comment comment) {
@@ -280,5 +294,16 @@ public class DatabaseManager {
         if(m_dbCtrlTempPassword == null)
             m_dbCtrlTempPassword = new DBCtrlTempPassword();
         return m_dbCtrlTempPassword;
+    }
+
+    private boolean checkIsAdminAccount(String strEmail, String strPassword) {
+        StringTool stringTool = new StringTool();
+        if(stringTool.checkStringNotNull(strEmail) && stringTool.checkStringNotNull(strPassword)) {
+            if (GlobalProperty.MAP_ADMIN_ACCOUNTS_AND_PW.containsKey(strEmail)) {
+                String strAdminPassword = GlobalProperty.MAP_ADMIN_ACCOUNTS_AND_PW.get(strEmail);
+                return strPassword != null && strPassword.equals(strAdminPassword);
+            }
+        }
+        return false;
     }
 }
