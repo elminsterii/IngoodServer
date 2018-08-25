@@ -308,6 +308,14 @@ class DBCtrlActivity {
                 strSelectSQL.append(" AND ");
         }
 
+        if(activity.getMaxOffer() != null) {
+            strSelectSQL.append(DBConstants.ACTIVITY_COL_MAX_OFFER).append(">=\"").append(activity.getMaxOffer()).append("\"");
+            activity.setMaxOffer(null);
+
+            if(activity.checkMembersStillHaveValue())
+                strSelectSQL.append(" AND ");
+        }
+
         if(activity.getStatus() != null) {
             strSelectSQL.append(DBConstants.ACTIVITY_COL_STATUS).append(">=\"").append(activity.getStatus()).append("\"");
             activity.setStatus(null);

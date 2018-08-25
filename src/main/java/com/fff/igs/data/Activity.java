@@ -313,6 +313,7 @@ public class Activity implements Cloneable {
                 || (DisplayName != null && !DisplayName.isEmpty())
                 || (Attention != null)
                 || (Good != null)
+                || (MaxOffer != null)
                 || (Status != null)
                 || (Location != null && !Location.isEmpty())
                 || (DateBegin != null && !DateBegin.isEmpty())
