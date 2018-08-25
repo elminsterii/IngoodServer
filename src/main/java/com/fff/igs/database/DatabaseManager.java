@@ -176,6 +176,10 @@ public class DatabaseManager {
         return getDBCtrlActivity().deem(strActivityId, iDeem, iDeemRb);
     }
 
+    public boolean offerTookActivity(String strActivityId) {
+        return getDBCtrlActivity().offerTook(strActivityId);
+    }
+
     public boolean checkActivityExist(Activity activity) {
         return getDBCtrlActivity().checkActivityExist(activity.getId());
     }

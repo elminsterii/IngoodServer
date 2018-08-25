@@ -42,6 +42,8 @@ class DBConstants {
     static final String ACTIVITY_COL_ATTENTION = "attention";
     static final String ACTIVITY_COL_ATTENDEES = "attendees";
     static final String ACTIVITY_COL_MAX_ATTENTION = "maxattention";
+    static final String ACTIVITY_COL_MAX_OFFER = "maxoffer";
+    static final String ACTIVITY_COL_OFFER_TOOK = "offertook";
     static final String ACTIVITY_COL_SAVERS = "savers";
     static final String ACTIVITY_COL_RESERVED = "reserved";
 

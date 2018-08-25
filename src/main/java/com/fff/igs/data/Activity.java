@@ -68,6 +68,12 @@ public class Activity implements Cloneable {
     @SerializedName("maxattention")
     private Integer MaxAttention;
 
+    @SerializedName("maxoffer")
+    private Integer MaxOffer;
+
+    @SerializedName("offertook")
+    private Integer OfferTook;
+
     @SerializedName("savers")
     private String Savers;
 
@@ -94,10 +100,12 @@ public class Activity implements Cloneable {
         Attention = activity.getAttention();
         Attendees = activity.getAttendees();
         MaxAttention = activity.getMaxAttention();
+        MaxOffer = activity.getMaxOffer();
+        OfferTook = activity.getOfferTook();
         Savers = activity.getSavers();
     }
 
-    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees, Integer maxAttention, String savers) {
+    public Activity(String id, String publisherEmail, String publisherUserPassword, String publishBegin, String publishEnd, Integer largeActivity, Integer earlyBird, String displayName, String dateBegin, String dateEnd, String location, Integer status, String description, String tags, Integer good, Integer noGood, Integer attention, String attendees, Integer maxAttention, Integer maxOffer, Integer offerTook, String savers) {
         Id = id;
         PublisherEmail = publisherEmail;
         PublisherUserPassword = publisherUserPassword;
@@ -117,6 +125,8 @@ public class Activity implements Cloneable {
         Attention = attention;
         Attendees = attendees;
         MaxAttention = maxAttention;
+        MaxOffer = maxOffer;
+        OfferTook = offerTook;
         Savers = savers;
     }
 
@@ -270,6 +280,22 @@ public class Activity implements Cloneable {
 
     public void setMaxAttention(Integer maxAttention) {
         MaxAttention = maxAttention;
+    }
+
+    public Integer getMaxOffer() {
+        return MaxOffer;
+    }
+
+    public void setMaxOffer(Integer maxOffer) {
+        MaxOffer = maxOffer;
+    }
+
+    public Integer getOfferTook() {
+        return OfferTook;
+    }
+
+    public void setOfferTook(Integer offerTook) {
+        OfferTook = offerTook;
     }
 
     public String getSavers() {

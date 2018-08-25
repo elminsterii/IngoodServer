@@ -46,6 +46,8 @@ class DBCtrlActivity {
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_SAVERS).append(" VARCHAR(1024) DEFAULT \'\', ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_RESERVED).append(" VARCHAR(1024) DEFAULT \'\', ");
             strCreateTableSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
+            strCreateTableSQL.append(DBConstants.ACTIVITY_COL_MAX_OFFER).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
+            strCreateTableSQL.append(DBConstants.ACTIVITY_COL_OFFER_TOOK).append(" INT UNSIGNED NOT NULL DEFAULT 0, ");
             strCreateTableSQL.append("PRIMARY KEY (").append(DBConstants.ACTIVITY_COL_ID).append(") );");
 
             try {
@@ -75,13 +77,13 @@ class DBCtrlActivity {
         return insert(activity.getPublisherEmail(), activity.getPublishBegin(), activity.getPublishEnd()
                 , activity.getLargeActivity(), activity.getEarlyBird(), activity.getDisplayName(), activity.getDateBegin()
                 , activity.getDateEnd(), activity.getLocation(), activity.getStatus(), activity.getDescription()
-                , activity.getTags(), activity.getMaxAttention());
+                , activity.getTags(), activity.getMaxAttention(), activity.getMaxOffer());
     }
 
     @SuppressWarnings("Duplicates")
     private String insert(String strPublisherEmail, String strPublishBegin, String strPublishEnd, Integer iLargeActivity
-            , Integer iEarlyBird, String strDisplayName, String strDateBegin, String strDateEnd, String strLocation
-            , Integer iStatus, String strDescription, String strTags, Integer iMaxAttention) {
+            , Integer iEarlyBird, String strDisplayName, String strDateBegin, String strDateEnd, String strLocation, Integer iStatus
+            , String strDescription, String strTags, Integer iMaxAttention, Integer iMaxOffer) {
 
         String strResId = null;
         StringTool stringTool = new StringTool();
@@ -115,7 +117,8 @@ class DBCtrlActivity {
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_STATUS).append(",");
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append(",");
         strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_TAGS).append(",");
-        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION);
+        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append(",");
+        strCreateActivitySQL.append(DBConstants.ACTIVITY_COL_MAX_OFFER);
         strCreateActivitySQL.append(") VALUES (?,");
         strCreateActivitySQL.append("\"").append(strPublisherEmail).append("\",");
         strCreateActivitySQL.append("\"").append(strPublishBegin).append("\",");
@@ -129,7 +132,8 @@ class DBCtrlActivity {
         strCreateActivitySQL.append(iStatus).append(",");
         strCreateActivitySQL.append("\"").append(strDescription == null ? "" : strDescription).append("\",");
         strCreateActivitySQL.append("\"").append(strTags == null ? "" : strTags).append("\",");
-        strCreateActivitySQL.append(iMaxAttention);
+        strCreateActivitySQL.append(iMaxAttention).append(",");
+        strCreateActivitySQL.append(iMaxOffer == null ? 0 : iMaxOffer);
         strCreateActivitySQL.append(");");
 
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -419,6 +423,8 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setMaxOffer(rs.getInt(DBConstants.ACTIVITY_COL_MAX_OFFER));
+                activity.setOfferTook(rs.getInt(DBConstants.ACTIVITY_COL_OFFER_TOOK));
                 activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
                 lsActivities.add(activity);
             }
@@ -463,6 +469,8 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setMaxOffer(rs.getInt(DBConstants.ACTIVITY_COL_MAX_OFFER));
+                activity.setOfferTook(rs.getInt(DBConstants.ACTIVITY_COL_OFFER_TOOK));
                 activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
                 lsActivities.add(activity);
             }
@@ -510,6 +518,8 @@ class DBCtrlActivity {
                 activity.setAttention(rs.getInt(DBConstants.ACTIVITY_COL_ATTENTION));
                 activity.setAttendees(rs.getString(DBConstants.ACTIVITY_COL_ATTENDEES));
                 activity.setMaxAttention(rs.getInt(DBConstants.ACTIVITY_COL_MAX_ATTENTION));
+                activity.setMaxOffer(rs.getInt(DBConstants.ACTIVITY_COL_MAX_OFFER));
+                activity.setOfferTook(rs.getInt(DBConstants.ACTIVITY_COL_OFFER_TOOK));
                 activity.setSavers(rs.getString(DBConstants.ACTIVITY_COL_SAVERS));
             }
         } catch (SQLException e) {
@@ -549,7 +559,8 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_STATUS).append("=").append(activity.getStatus()).append(",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append("=\"").append(activity.getDescription()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\",");
-        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\"");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_OFFER).append("=\"").append(activity.getMaxOffer()).append("\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
         strUpdateSQL.append("\";");
 
@@ -595,6 +606,7 @@ class DBCtrlActivity {
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_DESCRIPTION).append("=\"").append(activity.getDescription()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_TAGS).append("=\"").append(activity.getTags()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_ATTENTION).append("=\"").append(activity.getMaxAttention()).append("\",");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_MAX_OFFER).append("=\"").append(activity.getMaxOffer()).append("\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENTION).append("=").append("\"0\",");
         strUpdateSQL.append(DBConstants.ACTIVITY_COL_ATTENDEES).append("=").append("\"\"");
         strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(activity.getId());
@@ -821,6 +833,41 @@ class DBCtrlActivity {
         return activity;
     }
 
+    boolean offerTook(String strActivityId) {
+        boolean bRes = false;
+        StringTool stringTool = new StringTool();
+
+        if (!stringTool.checkStringNotNull(strActivityId))
+            return false;
+
+        Activity activity = queryById(strActivityId);
+        if(activity != null) {
+            if (activity.getOfferTook() >= activity.getMaxOffer()) {
+                return false;
+            }
+        } else
+            return false;
+
+        Connection conn = DBConnection.getConnection();
+        StringBuilder strUpdateSQL = new StringBuilder("UPDATE ");
+        strUpdateSQL.append(DBConstants.TABLE_NAME_ACTIVITY).append(" SET ");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_OFFER_TOOK).append("=");
+        strUpdateSQL.append(DBConstants.ACTIVITY_COL_OFFER_TOOK).append("+1");
+        strUpdateSQL.append(" WHERE ").append(DBConstants.ACTIVITY_COL_ID).append("=\"").append(strActivityId);
+        strUpdateSQL.append("\";");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        try (PreparedStatement statementUpdateActivity = conn.prepareStatement(strUpdateSQL.toString())) {
+            bRes = statementUpdateActivity.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.warning("SQL erro, " + e.getMessage());
+        }
+
+        LOGGER.info("update time (ms):" + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        return bRes;
+    }
+
     private void fillUpdateActivityIfNull(Activity oldActivity, Activity newActivity) {
         if (newActivity.getId() == null)
             newActivity.setId(oldActivity.getId());
@@ -858,6 +905,10 @@ class DBCtrlActivity {
             newActivity.setAttendees(oldActivity.getAttendees());
         if (newActivity.getMaxAttention() == null)
             newActivity.setMaxAttention(oldActivity.getMaxAttention());
+        if (newActivity.getMaxOffer() == null)
+            newActivity.setMaxOffer(oldActivity.getMaxOffer());
+        if (newActivity.getOfferTook() == null)
+            newActivity.setOfferTook(oldActivity.getOfferTook());
         if (newActivity.getSavers() == null)
             newActivity.setSavers(oldActivity.getSavers());
     }

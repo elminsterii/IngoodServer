@@ -991,6 +991,57 @@ public class ServerManager {
         return serverResp;
     }
 
+    public ServerResponse tookOfferActivity(JsonObject jsonSource) {
+        ServerResponse serverResp = new ServerResponse();
+        ServerResponse.STATUS_CODE resCode;
+
+        if(jsonSource != null) {
+            final String TAG_EMAIL = "email";
+            final String TAG_USERPASSWORD = "userpassword";
+            final String TAG_ACTIVITYID = "activityid";
+
+            JsonElement jsonEmail = jsonSource.get(TAG_EMAIL);
+            JsonElement jsonUserPassword = jsonSource.get(TAG_USERPASSWORD);
+            JsonElement jsonActivityId = jsonSource.get(TAG_ACTIVITYID);
+
+            StringTool stringTool = new StringTool();
+
+            if (jsonEmail != null
+                    && jsonUserPassword != null
+                    && jsonActivityId != null
+                    && stringTool.checkStringNotNull(jsonEmail.getAsString())
+                    && stringTool.checkStringNotNull(jsonUserPassword.getAsString())
+                    && stringTool.checkStringNotNull(jsonActivityId.getAsString())) {
+
+                String strEmail = jsonEmail.getAsString();
+                String strUserPassword = jsonUserPassword.getAsString();
+                String strActivityId = jsonActivityId.getAsString();
+
+                DatabaseManager dbMgr = getDatabaseManager();
+
+                if (dbMgr.checkPersonValid(strEmail, strUserPassword)) {
+                    if (dbMgr.checkActivityExist(strActivityId)) {
+                        if (dbMgr.offerTookActivity(strActivityId)) {
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_SUCCESS;
+                        } else {
+                            resCode = ServerResponse.STATUS_CODE.ST_CODE_OFFER_MAX;
+                        }
+                    } else {
+                        resCode = ServerResponse.STATUS_CODE.ST_CODE_ACTIVITY_NOT_FOUND;
+                    }
+                } else {
+                    resCode = ServerResponse.STATUS_CODE.ST_CODE_USER_INVALID;
+                }
+            } else {
+                resCode = ServerResponse.STATUS_CODE.ST_CODE_MISSING_NECESSARY;
+            }
+        }else {
+            resCode = ServerResponse.STATUS_CODE.ST_CODE_JSON_FORMAT_WRONG;
+        }
+
+        serverResp.setStatus(resCode);
+        return serverResp;
+    }
 
     // --------------------------------- Comment control functions ---------------------------------
     public ServerResponse createComment(Comment comment) {

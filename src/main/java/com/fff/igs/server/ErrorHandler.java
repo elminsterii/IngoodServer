@@ -116,6 +116,13 @@ public class ErrorHandler {
                 strResponse = jsonObj.toString();
                 break;
 
+            case ST_CODE_OFFER_MAX :
+                jsonObj = new JsonObject();
+                jsonObj.addProperty(FAIL_PROPERTY_TITLE, stCode.ordinal());
+                jsonObj.addProperty(FAIL_PROPERTY_CONTENT, "Fail, All offers has been took");
+                strResponse = jsonObj.toString();
+                break;
+
             default:
                 jsonObj = new JsonObject();
                 jsonObj.addProperty(FAIL_PROPERTY_TITLE, stCode.ordinal());
